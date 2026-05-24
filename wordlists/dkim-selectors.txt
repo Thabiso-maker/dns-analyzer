@@ -1,0 +1,11 @@
+﻿default
+google
+mail
+k1
+selector1
+selector2
+dkim
+smtp
+postfix
+ses
+sendgrid

@@ -1,0 +1,180 @@
+[tool.poetry]
+name = "dns-analyzer"
+version = "0.1.0"
+description = "Enterprise-grade DNS Security Analyzer — detects misconfigurations, threats, and vulnerabilities across DNS infrastructure."
+authors = ["Your Name <you@example.com>"]
+license = "MIT"
+readme = "README.md"
+homepage = "https://github.com/yourname/dns-analyzer"
+repository = "https://github.com/yourname/dns-analyzer"
+documentation = "https://github.com/yourname/dns-analyzer/blob/main/docs/architecture.md"
+keywords = ["dns", "security", "analyzer", "spf", "dmarc", "dnssec", "cybersecurity"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Information Technology",
+    "Topic :: Security",
+    "Topic :: Internet :: Name Service (DNS)",
+    "Programming Language :: Python :: 3.11",
+    "License :: OSI Approved :: MIT License",
+]
+packages = [{ include = "dns_analyzer", from = "src" }]
+
+[tool.poetry.scripts]
+dns-analyzer = "cli.main:app"
+
+# ==============================================================================
+# DEPENDENCIES
+# ==============================================================================
+
+[tool.poetry.dependencies]
+python = "^3.11"
+
+# --- Web Framework ---
+fastapi = "^0.111.0"
+uvicorn = { version = "^0.30.0", extras = ["standard"] }
+httpx = "^0.27.0"                        # Async HTTP client (used in tests + providers)
+
+# --- DNS Engine ---
+dnspython = "^2.6.1"                     # Core DNS query library
+aiodns = "^3.2.0"                        # Async DNS resolver
+
+# --- Database ---
+sqlalchemy = { version = "^2.0.30", extras = ["asyncio"] }
+alembic = "^1.13.1"                      # DB migrations
+asyncpg = "^0.29.0"                      # Async PostgreSQL driver
+aiosqlite = "^0.20.0"                    # Async SQLite (for dev/testing)
+
+# --- Cache & Queue ---
+redis = { version = "^5.0.4", extras = ["hiredis"] }
+arq = "^0.25.0"                          # Async job queue backed by Redis
+
+# --- Configuration ---
+pydantic = "^2.7.1"
+pydantic-settings = "^2.3.0"            # Environment-driven settings
+python-dotenv = "^1.0.1"
+
+# --- CLI ---
+typer = { version = "^0.12.3", extras = ["all"] }
+rich = "^13.7.1"                         # Beautiful terminal output
+
+# --- Reporting ---
+jinja2 = "^3.1.4"                        # HTML template engine
+weasyprint = "^62.3"                     # HTML → PDF converter
+
+# --- Utilities ---
+tldextract = "^5.1.2"                    # Reliable domain parsing
+pyyaml = "^6.0.1"                        # YAML config parsing
+aiohttp = "^3.9.5"                       # Async HTTP (threat intel API calls)
+tenacity = "^8.3.0"                      # Retry logic with backoff
+structlog = "^24.2.0"                    # Structured JSON logging
+orjson = "^3.10.3"                       # Fast JSON serialization
+python-multipart = "^0.0.9"             # Multipart form data (file uploads)
+slowapi = "^0.1.9"                       # Rate limiting for FastAPI
+
+# --- Notifications ---
+aiosmtplib = "^3.0.1"                   # Async SMTP email sender
+
+[tool.poetry.group.dev.dependencies]
+# --- Testing ---
+pytest = "^8.2.0"
+pytest-asyncio = "^0.23.7"
+pytest-cov = "^5.0.0"
+pytest-mock = "^3.14.0"
+pytest-httpx = "^0.30.0"                # Mock httpx requests in tests
+factory-boy = "^3.3.0"                  # Test data factories
+faker = "^25.2.0"                        # Fake data generation
+
+# --- Code Quality ---
+ruff = "^0.4.7"                          # Linter + formatter (replaces flake8, isort, pyupgrade)
+black = "^24.4.2"                        # Code formatter
+mypy = "^1.10.0"                         # Static type checker
+pre-commit = "^3.7.1"                   # Pre-commit hook runner
+
+# --- Type Stubs ---
+types-pyyaml = "^6.0.12"
+types-redis = "^4.6.0"
+
+# --- Dev Tools ---
+ipython = "^8.25.0"                      # Interactive REPL
+watchfiles = "^0.22.0"                  # File watcher for hot reload
+
+# ==============================================================================
+# TOOL CONFIGURATION
+# ==============================================================================
+
+[tool.ruff]
+target-version = "py311"
+line-length = 100
+src = ["src", "cli", "tests"]
+
+[tool.ruff.lint]
+select = [
+    "E",    # pycodestyle errors
+    "W",    # pycodestyle warnings
+    "F",    # pyflakes
+    "I",    # isort
+    "B",    # flake8-bugbear
+    "C4",   # flake8-comprehensions
+    "UP",   # pyupgrade
+    "ARG",  # flake8-unused-arguments
+    "SIM",  # flake8-simplify
+    "TCH",  # flake8-type-checking
+    "RUF",  # ruff-specific rules
+]
+ignore = [
+    "E501",  # line too long (handled by black)
+    "B008",  # do not perform function calls in argument defaults (FastAPI pattern)
+]
+
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["ARG", "S101"]    # Allow assert statements and unused args in tests
+"src/**/models/**" = ["TCH"]    # Allow runtime imports in models
+
+[tool.ruff.lint.isort]
+known-first-party = ["dns_analyzer", "cli"]
+
+[tool.black]
+line-length = 100
+target-version = ["py311"]
+include = '\.pyi?$'
+
+[tool.mypy]
+python_version = "3.11"
+strict = true
+warn_return_any = true
+warn_unused_configs = true
+ignore_missing_imports = true
+exclude = ["tests/", "migrations/"]
+
+[tool.pytest.ini_options]
+asyncio_mode = "auto"
+testpaths = ["tests"]
+addopts = [
+    "--cov=src/dns_analyzer",
+    "--cov-report=term-missing",
+    "--cov-report=html:htmlcov",
+    "--cov-fail-under=80",
+    "-v",
+]
+markers = [
+    "unit: Unit tests (no external dependencies)",
+    "integration: Integration tests (require DB and Redis)",
+    "e2e: End-to-end tests (require full stack)",
+    "slow: Tests that take > 5 seconds",
+]
+
+[tool.coverage.run]
+source = ["src/dns_analyzer"]
+omit = ["*/migrations/*", "*/tests/*", "*/__init__.py"]
+
+[tool.coverage.report]
+exclude_lines = [
+    "pragma: no cover",
+    "def __repr__",
+    "raise NotImplementedError",
+    "if TYPE_CHECKING:",
+]
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"

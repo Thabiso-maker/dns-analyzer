@@ -1,0 +1,142 @@
+# ==============================================================================
+# DNS Security Analyzer — Docker Compose (Full Stack)
+# ==============================================================================
+# Starts: app + background worker + PostgreSQL + Redis
+#
+# Usage:
+#   docker compose -f infra/docker-compose.yml up -d
+#   docker compose -f infra/docker-compose.yml logs -f
+#   docker compose -f infra/docker-compose.yml down
+# ==============================================================================
+
+services:
+
+  # ── API Server ──────────────────────────────────────────────────────────────
+  app:
+    build:
+      context: ..
+      dockerfile: infra/docker/Dockerfile
+    image: dns-analyzer:latest
+    container_name: dns-analyzer-api
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    environment:
+      APP_ENV: production
+      APP_DEBUG: "false"
+      APP_SECRET_KEY: ${APP_SECRET_KEY:-change-me-in-production}
+      DATABASE_URL: postgresql+asyncpg://postgres:${POSTGRES_PASSWORD:-dns_analyzer_pw}@postgres:5432/dns_analyzer
+      REDIS_URL: redis://redis:6379/0
+      LOG_FORMAT: json
+      LOG_LEVEL: INFO
+      # Threat intel (pass from host .env)
+      VIRUSTOTAL_API_KEY: ${VIRUSTOTAL_API_KEY:-}
+      VIRUSTOTAL_ENABLED: ${VIRUSTOTAL_ENABLED:-false}
+      ABUSEIPDB_API_KEY: ${ABUSEIPDB_API_KEY:-}
+      ABUSEIPDB_ENABLED: ${ABUSEIPDB_ENABLED:-false}
+      SHODAN_API_KEY: ${SHODAN_API_KEY:-}
+      SHODAN_ENABLED: ${SHODAN_ENABLED:-false}
+      IPINFO_API_KEY: ${IPINFO_API_KEY:-}
+      IPINFO_ENABLED: ${IPINFO_ENABLED:-false}
+    volumes:
+      - reports_data:/app/reports/output
+      - logs_data:/app/logs
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dns-analyzer-net
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/api/v1/health/ping"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+
+  # ── Background Worker (ARQ) ────────────────────────────────────────────────
+  worker:
+    image: dns-analyzer:latest
+    container_name: dns-analyzer-worker
+    restart: unless-stopped
+    command: ["arq", "dns_analyzer.scheduler.job_queue.WorkerSettings"]
+    environment:
+      APP_ENV: production
+      DATABASE_URL: postgresql+asyncpg://postgres:${POSTGRES_PASSWORD:-dns_analyzer_pw}@postgres:5432/dns_analyzer
+      REDIS_URL: redis://redis:6379/1
+      LOG_FORMAT: json
+      LOG_LEVEL: INFO
+      VIRUSTOTAL_API_KEY: ${VIRUSTOTAL_API_KEY:-}
+      ABUSEIPDB_API_KEY: ${ABUSEIPDB_API_KEY:-}
+      IPINFO_API_KEY: ${IPINFO_API_KEY:-}
+    depends_on:
+      postgres:
+        condition: service_healthy
+      redis:
+        condition: service_healthy
+    networks:
+      - dns-analyzer-net
+
+  # ── PostgreSQL ─────────────────────────────────────────────────────────────
+  postgres:
+    image: postgres:16-alpine
+    container_name: dns-analyzer-postgres
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-dns_analyzer_pw}
+      POSTGRES_DB: dns_analyzer
+      PGDATA: /var/lib/postgresql/data/pgdata
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - dns-analyzer-net
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres -d dns_analyzer"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 20s
+    ports:
+      - "5432:5432"   # Expose for local DB tools (remove in production)
+
+  # ── Redis ──────────────────────────────────────────────────────────────────
+  redis:
+    image: redis:7-alpine
+    container_name: dns-analyzer-redis
+    restart: unless-stopped
+    command: >
+      redis-server
+      --maxmemory 256mb
+      --maxmemory-policy allkeys-lru
+      --save 60 1
+      --loglevel warning
+    volumes:
+      - redis_data:/data
+    networks:
+      - dns-analyzer-net
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    ports:
+      - "6379:6379"   # Expose for local inspection (remove in production)
+
+# ── Volumes ────────────────────────────────────────────────────────────────────
+volumes:
+  postgres_data:
+    driver: local
+  redis_data:
+    driver: local
+  reports_data:
+    driver: local
+  logs_data:
+    driver: local
+
+# ── Networks ───────────────────────────────────────────────────────────────────
+networks:
+  dns-analyzer-net:
+    driver: bridge
+    name: dns-analyzer-net
