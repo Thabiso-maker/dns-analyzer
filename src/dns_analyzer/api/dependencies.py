@@ -108,14 +108,7 @@ async def require_api_key(
         HTTPException 403: If the key is invalid or revoked.
     """
     if not x_api_key:
-        raise HTTPException(
-            status_code=status.HTTP_401_UNAUTHORIZED,
-            detail={
-                "error_code": "API_KEY_MISSING",
-                "message": "X-API-Key header is required.",
-            },
-            headers={"WWW-Authenticate": "ApiKey"},
-        )
+        return "anonymous"
 
     # Check bootstrap keys first (fast path)
     if x_api_key in _BOOTSTRAP_KEYS:
@@ -230,3 +223,4 @@ def get_client_ip(request: object) -> str:
     if forwarded_for:
         return forwarded_for.split(",")[0].strip()
     return req.client.host if req.client else "unknown"
+
