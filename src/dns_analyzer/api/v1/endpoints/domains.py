@@ -150,7 +150,7 @@ async def update_domain(
 @router.delete(
     "/{domain_id}",
     summary="Delete a domain",
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_OK,
 )
 async def delete_domain(
     domain_id: str,
