@@ -1,10 +1,12 @@
-﻿from __future__ import annotations
+from __future__ import annotations
 import time
 from contextlib import asynccontextmanager
+from pathlib import Path
 from typing import AsyncGenerator
 from fastapi import FastAPI, Request, status
 from fastapi.middleware.cors import CORSMiddleware
-from fastapi.responses import JSONResponse
+from fastapi.responses import FileResponse, JSONResponse
+from fastapi.staticfiles import StaticFiles
 from dns_analyzer.api.middleware import LoggingMiddleware, RateLimitMiddleware, RequestIDMiddleware
 from dns_analyzer.api.v1.router import api_router
 from dns_analyzer.config.settings import get_settings
@@ -14,6 +16,8 @@ from dns_analyzer.utils.logger import configure_logging, get_logger
 
 log = get_logger(__name__)
 _start_time: float = 0.0
+
+STATIC_DIR = Path(__file__).resolve().parent.parent / "static"
 
 @asynccontextmanager
 async def lifespan(app: FastAPI) -> AsyncGenerator[None, None]:
@@ -55,6 +59,16 @@ def create_app() -> FastAPI:
     app.add_middleware(LoggingMiddleware)
     app.include_router(api_router, prefix=settings.app_api_prefix)
 
+    # Serve static files
+    if STATIC_DIR.exists():
+        app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+
+    # Serve frontend at root
+    @app.get("/", include_in_schema=False)
+    async def serve_frontend() -> FileResponse:
+        index = STATIC_DIR / "index.html"
+        return FileResponse(str(index))
+
     @app.exception_handler(DNSAnalyzerError)
     async def dns_error_handler(request: Request, exc: DNSAnalyzerError) -> JSONResponse:
         return JSONResponse(status_code=exc.http_status, content=exc.to_dict())
@@ -62,6 +76,6 @@ def create_app() -> FastAPI:
     @app.exception_handler(Exception)
     async def general_error_handler(request: Request, exc: Exception) -> JSONResponse:
         log.error("api.unhandled_exception", error=str(exc), exc_info=True)
-        return JSONResponse(status_code=500, content={"error_code":"INTERNAL_ERROR","message":str(exc)})
+        return JSONResponse(status_code=500, content={"error_code": "INTERNAL_ERROR", "message": str(exc)})
 
     return app
