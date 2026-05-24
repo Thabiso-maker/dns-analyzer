@@ -223,7 +223,7 @@ async def download_report(
 @router.delete(
     "/{report_id}",
     summary="Delete a report",
-    status_code=status.HTTP_204_NO_CONTENT,
+    status_code=status.HTTP_200_OK,
 )
 async def delete_report(
     report_id: str,
