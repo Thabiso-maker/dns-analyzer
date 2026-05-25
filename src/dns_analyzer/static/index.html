@@ -19,8 +19,6 @@
 *{box-sizing:border-box;margin:0;padding:0}
 html{scroll-behavior:smooth}
 body{background:var(--bg0);color:var(--text);font-family:var(--mono);min-height:100vh;overflow-x:hidden}
-
-/* grid bg */
 body::before{content:'';position:fixed;inset:0;
   background-image:linear-gradient(rgba(41,121,255,.04) 1px,transparent 1px),linear-gradient(90deg,rgba(41,121,255,.04) 1px,transparent 1px);
   background-size:48px 48px;pointer-events:none;z-index:0}
@@ -28,7 +26,7 @@ body::after{content:'';position:fixed;inset:0;
   background:radial-gradient(ellipse 80% 50% at 50% -10%,rgba(0,255,136,.07),transparent);
   pointer-events:none;z-index:0}
 
-/* ── NAV ── */
+/* NAV */
 nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;
   padding:.9rem 2rem;border-bottom:1px solid var(--border);
   background:rgba(6,8,16,.92);backdrop-filter:blur(16px)}
@@ -38,35 +36,45 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .nav-title{font-family:var(--head);font-size:1.15rem;font-weight:700;letter-spacing:.04em}
 .nav-title em{color:var(--green);font-style:normal}
 .nav-right{display:flex;align-items:center;gap:1.5rem}
-.nav-link{font-size:.72rem;color:var(--muted2);text-decoration:none;letter-spacing:.06em;
-  text-transform:uppercase;transition:color .2s}
+.nav-link{font-size:.72rem;color:var(--muted2);text-decoration:none;letter-spacing:.06em;text-transform:uppercase;transition:color .2s}
 .nav-link:hover{color:var(--green)}
 .live-badge{display:flex;align-items:center;gap:.4rem;font-size:.7rem;color:var(--muted2)}
 .live-dot{width:7px;height:7px;border-radius:50%;background:var(--muted)}
 .live-dot.on{background:var(--green);box-shadow:0 0 6px var(--green);animation:blink 2s infinite}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:.4}}
 
-/* ── LAYOUT ── */
-.page{position:relative;z-index:1;max-width:960px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+/* TABS */
+.tabs{display:flex;gap:.5rem;margin-bottom:1.5rem;border-bottom:1px solid var(--border);padding-bottom:0}
+.tab-btn{font-family:var(--mono);font-size:.75rem;font-weight:600;letter-spacing:.06em;
+  text-transform:uppercase;padding:.6rem 1.2rem;border:none;background:transparent;
+  color:var(--muted);cursor:pointer;border-bottom:2px solid transparent;
+  transition:all .2s;margin-bottom:-1px}
+.tab-btn:hover{color:var(--text)}
+.tab-btn.active{color:var(--green);border-bottom-color:var(--green)}
+.tab-panel{display:none}
+.tab-panel.active{display:block}
 
-/* ── HERO ── */
-.hero{text-align:center;padding:3rem 0 2.5rem}
+/* LAYOUT */
+.page{position:relative;z-index:1;max-width:980px;margin:0 auto;padding:2.5rem 1.5rem 4rem}
+
+/* HERO */
+.hero{text-align:center;padding:2.5rem 0 2rem}
 .hero-eyebrow{display:inline-flex;align-items:center;gap:.5rem;font-size:.68rem;
   letter-spacing:.14em;text-transform:uppercase;color:var(--green);
-  border:1px solid rgba(0,255,136,.2);border-radius:999px;padding:.3rem .9rem;margin-bottom:1.6rem}
+  border:1px solid rgba(0,255,136,.2);border-radius:999px;padding:.3rem .9rem;margin-bottom:1.4rem}
 .hero-eyebrow::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green)}
-.hero h1{font-family:var(--head);font-size:clamp(2.2rem,6vw,4rem);font-weight:700;
-  letter-spacing:-.01em;line-height:1.1;margin-bottom:1rem}
+.hero h1{font-family:var(--head);font-size:clamp(2rem,5vw,3.6rem);font-weight:700;
+  letter-spacing:-.01em;line-height:1.1;margin-bottom:.9rem}
 .hero h1 .g{background:linear-gradient(90deg,var(--green),var(--cyan));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.hero-sub{font-size:.85rem;color:var(--muted2);line-height:1.7;max-width:480px;margin:0 auto 2rem}
+.hero-sub{font-size:.83rem;color:var(--muted2);line-height:1.7;max-width:460px;margin:0 auto 1.5rem}
 
-/* ── SCANNER CARD ── */
+/* SCANNER CARD */
 .scanner-card{background:var(--bg1);border:1px solid var(--border2);border-radius:16px;
   overflow:hidden;margin-bottom:1.5rem;position:relative}
 .scanner-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
   background:linear-gradient(90deg,transparent,var(--green),var(--cyan),transparent)}
-.scanner-top{padding:1.5rem 1.8rem}
+.scanner-top{padding:1.4rem 1.6rem}
 .scanner-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--muted);margin-bottom:.6rem;display:flex;align-items:center;gap:.5rem}
 .scanner-label::before{content:'>';color:var(--green)}
@@ -83,9 +91,7 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .scan-trigger:hover{transform:translateY(-1px);box-shadow:0 4px 20px rgba(0,255,136,.3)}
 .scan-trigger:active{transform:translateY(0)}
 .scan-trigger:disabled{opacity:.4;cursor:not-allowed;transform:none;box-shadow:none}
-
-/* checks row */
-.checks-row{display:flex;flex-wrap:wrap;gap:.5rem;padding:.9rem 1.8rem;
+.checks-row{display:flex;flex-wrap:wrap;gap:.5rem;padding:.9rem 1.6rem;
   border-top:1px solid var(--border);background:var(--bg2)}
 .chk{display:flex;align-items:center;gap:.35rem;font-size:.72rem;color:var(--muted2);
   cursor:pointer;user-select:none;padding:.25rem .6rem;border-radius:6px;
@@ -93,19 +99,14 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .chk:hover{color:var(--text);border-color:var(--border2)}
 .chk input{accent-color:var(--green);width:12px;height:12px}
 .chk.active{color:var(--green);border-color:rgba(0,255,136,.2);background:var(--green3)}
-
-/* api key */
-.apikey-row{display:flex;align-items:center;gap:.8rem;padding:.8rem 1.8rem;
-  border-top:1px solid var(--border)}
-.apikey-lbl{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;
-  color:var(--muted);white-space:nowrap}
+.apikey-row{display:flex;align-items:center;gap:.8rem;padding:.7rem 1.6rem;border-top:1px solid var(--border)}
+.apikey-lbl{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);white-space:nowrap}
 .apikey-field{flex:1;background:var(--bg0);border:1px solid var(--border);border-radius:8px;
-  padding:.5rem .9rem;font-family:var(--mono);font-size:.78rem;color:var(--muted2);
-  outline:none;transition:border-color .2s}
+  padding:.5rem .9rem;font-family:var(--mono);font-size:.78rem;color:var(--muted2);outline:none;transition:border-color .2s}
 .apikey-field:focus{border-color:rgba(41,121,255,.4);color:var(--text)}
 .apikey-field::placeholder{opacity:.4}
 
-/* ── PROGRESS ── */
+/* PROGRESS */
 .progress-wrap{display:none;background:var(--bg1);border:1px solid var(--border2);
   border-radius:14px;padding:1.4rem 1.6rem;margin-bottom:1.5rem}
 .progress-wrap.show{display:block}
@@ -113,34 +114,27 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .spin{width:28px;height:28px;border:2px solid var(--border2);border-top-color:var(--green);
   border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
 @keyframes spin{to{transform:rotate(360deg)}}
-.prog-info{}
 .prog-title{font-size:.88rem;font-weight:600;margin-bottom:.2rem}
 .prog-sub{font-size:.72rem;color:var(--muted2)}
 .prog-bar-wrap{height:3px;background:var(--border);border-radius:99px;overflow:hidden}
-.prog-bar{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));
-  border-radius:99px;width:0%;transition:width .4s ease}
+.prog-bar{height:100%;background:linear-gradient(90deg,var(--green),var(--cyan));border-radius:99px;width:0%;transition:width .4s ease}
 .prog-steps{display:flex;justify-content:space-between;margin-top:.7rem;flex-wrap:wrap;gap:.3rem}
 .step-item{font-size:.62rem;color:var(--muted);display:flex;align-items:center;gap:.3rem}
-.step-item.done{color:var(--green)}
-.step-item.active{color:var(--cyan)}
+.step-item.done{color:var(--green)}.step-item.active{color:var(--cyan)}
 .step-item::before{content:'○';font-size:.6rem}
 .step-item.done::before{content:'●';color:var(--green)}
 .step-item.active::before{content:'◉';color:var(--cyan)}
 
-/* ── ERROR ── */
+/* ERROR */
 .err-wrap{display:none;background:rgba(255,23,68,.07);border:1px solid rgba(255,23,68,.25);
-  border-radius:12px;padding:1rem 1.3rem;margin-bottom:1.5rem;
-  font-size:.82rem;color:var(--red2);display:none}
+  border-radius:12px;padding:1rem 1.3rem;margin-bottom:1.5rem;font-size:.82rem;color:var(--red2)}
 .err-wrap.show{display:flex;align-items:flex-start;gap:.7rem}
 .err-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
 
-/* ── RESULTS ── */
+/* RESULTS */
 #results{display:none}
 #results.show{display:block}
-
-/* result header */
-.res-header{display:flex;align-items:flex-start;justify-content:space-between;
-  margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
+.res-header{display:flex;align-items:flex-start;justify-content:space-between;margin-bottom:1.5rem;gap:1rem;flex-wrap:wrap}
 .res-domain{font-family:var(--head);font-size:1.5rem;font-weight:700}
 .res-domain span{color:var(--green)}
 .res-meta{font-size:.7rem;color:var(--muted2);margin-top:.2rem}
@@ -157,64 +151,41 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .score-block{text-align:center}
 .score-num{font-family:var(--head);font-size:2.4rem;font-weight:700;line-height:1}
 .score-lbl{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.1em}
-
-/* stats strip */
 .stats-strip{display:grid;grid-template-columns:repeat(5,1fr);gap:.8rem;margin-bottom:1.8rem}
-.stat-tile{background:var(--bg1);border:1px solid var(--border);border-radius:12px;
-  padding:.9rem;text-align:center;position:relative;overflow:hidden}
+.stat-tile{background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:.9rem;text-align:center;position:relative;overflow:hidden}
 .stat-tile::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px}
-.stat-tile.tc::after{background:var(--red)}
-.stat-tile.th::after{background:var(--orange)}
-.stat-tile.tm::after{background:var(--yellow)}
-.stat-tile.tl::after{background:var(--blue2)}
+.stat-tile.tc::after{background:var(--red)}.stat-tile.th::after{background:var(--orange)}
+.stat-tile.tm::after{background:var(--yellow)}.stat-tile.tl::after{background:var(--blue2)}
 .stat-tile.tp::after{background:var(--green)}
 .stat-n{font-family:var(--head);font-size:1.9rem;font-weight:700;line-height:1;margin-bottom:.25rem}
-.stat-n.nc{color:var(--red)}
-.stat-n.nh{color:var(--orange)}
-.stat-n.nm{color:var(--yellow)}
-.stat-n.nl{color:var(--blue2)}
-.stat-n.np{color:var(--green)}
+.stat-n.nc{color:var(--red)}.stat-n.nh{color:var(--orange)}.stat-n.nm{color:var(--yellow)}
+.stat-n.nl{color:var(--blue2)}.stat-n.np{color:var(--green)}
 .stat-l{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
-
-/* analyzer breakdown */
-.breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
-  gap:.7rem;margin-bottom:1.8rem}
-.az-card{background:var(--bg1);border:1px solid var(--border);border-radius:10px;
-  padding:.8rem 1rem;display:flex;align-items:center;gap:.6rem}
+.breakdown{display:grid;grid-template-columns:repeat(auto-fill,minmax(140px,1fr));gap:.7rem;margin-bottom:1.8rem}
+.az-card{background:var(--bg1);border:1px solid var(--border);border-radius:10px;padding:.8rem 1rem;display:flex;align-items:center;gap:.6rem}
 .az-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0}
 .az-name{font-size:.75rem;font-weight:600;flex:1}
 .az-badge{font-size:.6rem;font-weight:700;padding:.15rem .4rem;border-radius:4px}
 .az-pass{background:rgba(0,255,136,.1);color:var(--green)}
 .az-warn{background:rgba(255,214,0,.1);color:var(--yellow)}
 .az-fail{background:rgba(255,23,68,.1);color:var(--red)}
-
-/* findings list */
 .findings-hdr{display:flex;align-items:center;justify-content:space-between;margin-bottom:.9rem}
-.findings-title{font-family:var(--head);font-size:.8rem;font-weight:600;
-  letter-spacing:.12em;text-transform:uppercase;color:var(--muted2)}
+.findings-title{font-family:var(--head);font-size:.8rem;font-weight:600;letter-spacing:.12em;text-transform:uppercase;color:var(--muted2)}
 .filter-tabs{display:flex;gap:.4rem}
-.ftab{font-size:.65rem;padding:.2rem .6rem;border-radius:6px;border:1px solid var(--border);
-  color:var(--muted);cursor:pointer;transition:all .2s;background:transparent}
+.ftab{font-size:.65rem;padding:.2rem .6rem;border-radius:6px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;background:transparent}
 .ftab.active{border-color:var(--green);color:var(--green);background:var(--green3)}
-
-.finding{background:var(--bg1);border:1px solid var(--border);border-radius:12px;
-  margin-bottom:.65rem;overflow:hidden;cursor:pointer;transition:border-color .2s}
-.finding:hover{border-color:var(--border2)}
-.finding.open{border-color:var(--border2)}
+.finding{background:var(--bg1);border:1px solid var(--border);border-radius:12px;margin-bottom:.65rem;overflow:hidden;cursor:pointer;transition:border-color .2s}
+.finding:hover{border-color:var(--border2)}.finding.open{border-color:var(--border2)}
 .finding-top{display:flex;align-items:center;gap:.8rem;padding:.9rem 1.1rem}
 .finding-sev{width:3px;height:36px;border-radius:99px;flex-shrink:0}
-.sev-critical{background:var(--red)}
-.sev-high{background:var(--orange)}
-.sev-medium{background:var(--yellow)}
-.sev-low{background:var(--blue2)}
-.sev-info{background:var(--muted)}
+.sev-critical{background:var(--red)}.sev-high{background:var(--orange)}
+.sev-medium{background:var(--yellow)}.sev-low{background:var(--blue2)}.sev-info{background:var(--muted)}
 .finding-icon{font-size:1.1rem;flex-shrink:0}
 .finding-main{flex:1;min-width:0}
 .finding-name{font-size:.85rem;font-weight:600;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .finding-check{font-size:.68rem;color:var(--muted2)}
 .finding-right{display:flex;align-items:center;gap:.5rem;flex-shrink:0}
-.sev-tag{font-size:.6rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;
-  letter-spacing:.06em;text-transform:uppercase}
+.sev-tag{font-size:.6rem;font-weight:700;padding:.2rem .5rem;border-radius:5px;letter-spacing:.06em;text-transform:uppercase}
 .sev-tag.critical{background:rgba(255,23,68,.15);color:var(--red)}
 .sev-tag.high{background:rgba(255,145,0,.15);color:var(--orange)}
 .sev-tag.medium{background:rgba(255,214,0,.12);color:var(--yellow)}
@@ -227,35 +198,109 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .finding.open .finding-body{display:block}
 .finding-desc{font-size:.78rem;color:var(--muted2);line-height:1.65;margin:.7rem 0 .6rem}
 .finding-row{display:flex;gap:.5rem;flex-wrap:wrap;margin-bottom:.6rem}
-.mini-tag{font-size:.62rem;padding:.15rem .45rem;border-radius:4px;
-  background:rgba(255,255,255,.04);color:var(--muted2)}
-.remediation{background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.15);
-  border-radius:8px;padding:.7rem .9rem;font-size:.76rem;color:rgba(0,255,136,.85);
-  line-height:1.55;margin-top:.5rem}
+.mini-tag{font-size:.62rem;padding:.15rem .45rem;border-radius:4px;background:rgba(255,255,255,.04);color:var(--muted2)}
+.remediation{background:rgba(0,255,136,.05);border:1px solid rgba(0,255,136,.15);border-radius:8px;padding:.7rem .9rem;font-size:.76rem;color:rgba(0,255,136,.85);line-height:1.55;margin-top:.5rem}
 .remediation::before{content:'⚡ Fix: ';font-weight:700}
-.evidence-block{background:var(--bg0);border:1px solid var(--border);border-radius:8px;
-  padding:.6rem .9rem;font-size:.72rem;color:var(--muted2);line-height:1.5;margin-top:.5rem;
-  word-break:break-all}
+.evidence-block{background:var(--bg0);border:1px solid var(--border);border-radius:8px;padding:.6rem .9rem;font-size:.72rem;color:var(--muted2);line-height:1.5;margin-top:.5rem;word-break:break-all}
 .evidence-block::before{content:'DNS Record: ';color:var(--cyan);font-weight:600}
 
-/* ── HISTORY ── */
+/* AI PANEL */
+.ai-panel{background:var(--bg1);border:1px solid rgba(213,0,249,.25);border-radius:14px;
+  margin-top:1.5rem;overflow:hidden;position:relative}
+.ai-panel::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;
+  background:linear-gradient(90deg,var(--purple),var(--pink),var(--cyan))}
+.ai-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;
+  border-bottom:1px solid var(--border)}
+.ai-title{display:flex;align-items:center;gap:.6rem;font-family:var(--head);font-size:.9rem;font-weight:700}
+.ai-title-icon{font-size:1.1rem}
+.ai-badge{font-size:.6rem;font-weight:700;padding:.2rem .5rem;border-radius:4px;
+  background:rgba(213,0,249,.15);color:var(--purple);letter-spacing:.06em}
+.ai-btn{background:linear-gradient(135deg,var(--purple),var(--pink));color:#fff;
+  border:none;border-radius:8px;padding:.5rem 1.1rem;font-family:var(--mono);
+  font-size:.75rem;font-weight:700;cursor:pointer;letter-spacing:.05em;transition:all .2s}
+.ai-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(213,0,249,.3)}
+.ai-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.ai-body{padding:1.2rem 1.3rem}
+.ai-placeholder{text-align:center;padding:2rem;color:var(--muted);font-size:.8rem}
+.ai-placeholder-icon{font-size:2rem;margin-bottom:.5rem;opacity:.5}
+.ai-loading{display:flex;align-items:center;gap:.8rem;padding:1.5rem;color:var(--muted2);font-size:.8rem}
+.ai-spin{width:20px;height:20px;border:2px solid var(--border2);border-top-color:var(--purple);
+  border-radius:50%;animation:spin .7s linear infinite;flex-shrink:0}
+.ai-content{font-size:.8rem;line-height:1.7;color:var(--text)}
+.ai-content h3{font-family:var(--head);font-size:.9rem;font-weight:700;color:var(--purple);
+  margin:1rem 0 .4rem;display:flex;align-items:center;gap:.4rem}
+.ai-content h3:first-child{margin-top:0}
+.ai-content p{color:var(--muted2);margin-bottom:.6rem}
+.ai-content ul{padding-left:1.2rem;color:var(--muted2);margin-bottom:.6rem}
+.ai-content li{margin-bottom:.3rem}
+.ai-content code{background:var(--bg0);border:1px solid var(--border);border-radius:4px;
+  padding:.1rem .4rem;font-size:.75rem;color:var(--cyan)}
+.ai-content .priority-high{border-left:3px solid var(--red);padding-left:.8rem;margin:.5rem 0}
+.ai-content .priority-med{border-left:3px solid var(--yellow);padding-left:.8rem;margin:.5rem 0}
+.ai-content .priority-low{border-left:3px solid var(--blue2);padding-left:.8rem;margin:.5rem 0}
+
+/* BULK SCANNER */
+.bulk-card{background:var(--bg1);border:1px solid var(--border2);border-radius:16px;overflow:hidden;position:relative;margin-bottom:1.5rem}
+.bulk-card::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),var(--yellow),transparent)}
+.bulk-top{padding:1.4rem 1.6rem}
+.bulk-label{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.bulk-label::before{content:'//';color:var(--orange)}
+.bulk-methods{display:flex;gap:.6rem;margin-bottom:1rem}
+.method-btn{font-size:.72rem;padding:.35rem .8rem;border-radius:6px;border:1px solid var(--border);color:var(--muted);cursor:pointer;transition:all .2s;background:transparent;font-family:var(--mono)}
+.method-btn.active{border-color:var(--orange);color:var(--orange);background:rgba(255,145,0,.08)}
+.bulk-textarea{width:100%;background:var(--bg0);border:1px solid var(--border2);border-radius:10px;
+  padding:.8rem 1rem;font-family:var(--mono);font-size:.8rem;color:var(--text);
+  outline:none;resize:vertical;min-height:120px;transition:border-color .2s;line-height:1.6}
+.bulk-textarea:focus{border-color:var(--orange);box-shadow:0 0 0 3px rgba(255,145,0,.08)}
+.bulk-textarea::placeholder{color:var(--muted)}
+.bulk-upload-area{border:2px dashed var(--border2);border-radius:10px;padding:2rem;text-align:center;cursor:pointer;transition:all .2s}
+.bulk-upload-area:hover{border-color:var(--orange);background:rgba(255,145,0,.04)}
+.bulk-upload-area input{display:none}
+.upload-icon{font-size:2rem;margin-bottom:.5rem;opacity:.6}
+.upload-txt{font-size:.8rem;color:var(--muted2)}
+.upload-sub{font-size:.7rem;color:var(--muted);margin-top:.3rem}
+.bulk-bottom{display:flex;align-items:center;justify-content:space-between;padding:.9rem 1.6rem;border-top:1px solid var(--border);background:var(--bg2);flex-wrap:wrap;gap:.7rem}
+.bulk-info{font-size:.72rem;color:var(--muted2)}
+.bulk-info span{color:var(--orange);font-weight:600}
+.bulk-trigger{background:linear-gradient(135deg,var(--orange),var(--yellow));color:#000;border:none;border-radius:8px;padding:.65rem 1.4rem;font-family:var(--mono);font-size:.78rem;font-weight:700;cursor:pointer;letter-spacing:.05em;text-transform:uppercase;transition:all .2s}
+.bulk-trigger:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(255,145,0,.3)}
+.bulk-trigger:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* BULK RESULTS TABLE */
+.bulk-results{background:var(--bg1);border:1px solid var(--border);border-radius:14px;overflow:hidden;margin-top:1.5rem;display:none}
+.bulk-results.show{display:block}
+.bulk-res-header{display:flex;align-items:center;justify-content:space-between;padding:1rem 1.3rem;border-bottom:1px solid var(--border)}
+.bulk-res-title{font-family:var(--head);font-size:.9rem;font-weight:700}
+.bulk-export-btn{font-size:.7rem;padding:.3rem .8rem;border-radius:6px;border:1px solid var(--border2);color:var(--muted2);cursor:pointer;background:transparent;font-family:var(--mono);transition:all .2s}
+.bulk-export-btn:hover{border-color:var(--green);color:var(--green)}
+.bulk-table{width:100%;border-collapse:collapse}
+.bulk-table th{font-size:.65rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);
+  padding:.6rem 1rem;text-align:left;border-bottom:1px solid var(--border);background:var(--bg2)}
+.bulk-table td{padding:.65rem 1rem;font-size:.78rem;border-bottom:1px solid var(--border);vertical-align:middle}
+.bulk-table tr:last-child td{border-bottom:none}
+.bulk-table tr:hover td{background:rgba(255,255,255,.02)}
+.domain-cell{font-weight:600}
+.status-cell{display:flex;align-items:center;gap:.4rem}
+.status-dot-sm{width:6px;height:6px;border-radius:50%;flex-shrink:0}
+.bulk-grade{font-family:var(--head);font-size:1rem;font-weight:700}
+.bulk-score{font-family:var(--head);font-size:.9rem}
+.bulk-progress-row{padding:.8rem 1rem;border-bottom:1px solid var(--border);font-size:.75rem;color:var(--muted2)}
+.bulk-progress-bar{height:2px;background:var(--border);border-radius:99px;margin-top:.4rem;overflow:hidden}
+.bulk-progress-fill{height:100%;background:linear-gradient(90deg,var(--orange),var(--yellow));border-radius:99px;transition:width .3s ease}
+
+/* HISTORY */
 .hist-section{margin-top:2rem}
-.hist-hdr{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;
-  color:var(--muted);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.hist-hdr{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
 .hist-hdr::before{content:'//';color:var(--green)}
-.hist-item{display:flex;align-items:center;justify-content:space-between;
-  background:var(--bg1);border:1px solid var(--border);border-radius:9px;
-  padding:.65rem 1rem;margin-bottom:.45rem;cursor:pointer;transition:border-color .2s}
+.hist-item{display:flex;align-items:center;justify-content:space-between;background:var(--bg1);border:1px solid var(--border);border-radius:9px;padding:.65rem 1rem;margin-bottom:.45rem;cursor:pointer;transition:border-color .2s}
 .hist-item:hover{border-color:var(--border2)}
-.hist-left{}
 .hist-domain{font-size:.82rem;font-weight:600}
 .hist-time{font-size:.65rem;color:var(--muted)}
 .hist-grade{font-family:var(--head);font-weight:700;font-size:1.1rem}
 
-/* ── FEATURES GRID ── */
+/* FEATURES */
 .feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.9rem;margin-top:3rem}
-.feat-card{background:var(--bg1);border:1px solid var(--border);border-radius:12px;
-  padding:1.2rem;position:relative;overflow:hidden}
+.feat-card{background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:1.2rem;position:relative;overflow:hidden}
 .feat-card::before{content:'';position:absolute;top:0;left:0;width:2px;height:100%}
 .feat-card:nth-child(1)::before{background:var(--green)}
 .feat-card:nth-child(2)::before{background:var(--cyan)}
@@ -267,13 +312,10 @@ nav{position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-co
 .feat-name{font-family:var(--head);font-size:.88rem;font-weight:700;margin-bottom:.35rem}
 .feat-txt{font-size:.73rem;color:var(--muted2);line-height:1.55}
 
-/* ── FOOTER ── */
-footer{position:relative;z-index:1;text-align:center;padding:1.5rem;
-  border-top:1px solid var(--border);font-size:.7rem;color:var(--muted)}
+footer{position:relative;z-index:1;text-align:center;padding:1.5rem;border-top:1px solid var(--border);font-size:.7rem;color:var(--muted)}
 footer a{color:var(--green);text-decoration:none}
 footer a:hover{text-decoration:underline}
 
-/* ── RESPONSIVE ── */
 @media(max-width:640px){
   nav{padding:.8rem 1rem}
   .page{padding:1.5rem 1rem 3rem}
@@ -303,120 +345,183 @@ footer a:hover{text-decoration:underline}
 </nav>
 
 <div class="page">
-
-  <!-- HERO -->
   <div class="hero">
     <div class="hero-eyebrow">Enterprise DNS Security Platform</div>
     <h1>Detect. Analyze.<br><span class="g">Secure Your DNS.</span></h1>
-    <p class="hero-sub">Scan any domain for SPF misconfigurations, DMARC gaps, DNSSEC failures, zone transfer exposure, and more — in seconds.</p>
+    <p class="hero-sub">Scan any domain for SPF misconfigurations, DMARC gaps, DNSSEC failures, zone transfer exposure, and more — with AI-powered fix recommendations.</p>
   </div>
 
-  <!-- SCANNER -->
-  <div class="scanner-card">
-    <div class="scanner-top">
-      <div class="scanner-label">Target Domain</div>
-      <div class="input-row">
-        <input class="domain-field" id="domainInput" type="text"
-          placeholder="example.com" autocomplete="off" spellcheck="false"/>
-        <button class="scan-trigger" id="scanBtn" onclick="startScan()">▶ Scan Now</button>
-      </div>
-    </div>
-    <div class="checks-row" id="checksRow">
-      <label class="chk active"><input type="checkbox" id="cSPF" checked onchange="toggleChk(this)"> SPF</label>
-      <label class="chk active"><input type="checkbox" id="cDMARC" checked onchange="toggleChk(this)"> DMARC</label>
-      <label class="chk active"><input type="checkbox" id="cDKIM" checked onchange="toggleChk(this)"> DKIM</label>
-      <label class="chk active"><input type="checkbox" id="cDNSSEC" checked onchange="toggleChk(this)"> DNSSEC</label>
-      <label class="chk active"><input type="checkbox" id="cAXFR" checked onchange="toggleChk(this)"> Zone Transfer</label>
-      <label class="chk active"><input type="checkbox" id="cCAA" checked onchange="toggleChk(this)"> CAA</label>
-      <label class="chk active"><input type="checkbox" id="cMTA" checked onchange="toggleChk(this)"> MTA-STS</label>
-      <label class="chk active"><input type="checkbox" id="cTTL" checked onchange="toggleChk(this)"> TTL</label>
-      <label class="chk"><input type="checkbox" id="cSUB" onchange="toggleChk(this)"> Subdomains</label>
-    </div>
-    <div class="apikey-row">
-      <span class="apikey-lbl">API Key</span>
-      <input class="apikey-field" id="apiKeyInput" type="password" placeholder="Optional — leave blank to scan without auth"/>
-    </div>
+  <!-- TABS -->
+  <div class="tabs">
+    <button class="tab-btn active" onclick="switchTab('single',this)">⚡ Single Scan</button>
+    <button class="tab-btn" onclick="switchTab('bulk',this)">📋 Bulk Scanner</button>
   </div>
 
-  <!-- PROGRESS -->
-  <div class="progress-wrap" id="progressWrap">
-    <div class="prog-head">
-      <div class="spin"></div>
-      <div class="prog-info">
-        <div class="prog-title" id="progTitle">Initializing scan...</div>
-        <div class="prog-sub" id="progSub">Connecting to DNS resolvers</div>
-      </div>
-    </div>
-    <div class="prog-bar-wrap"><div class="prog-bar" id="progBar"></div></div>
-    <div class="prog-steps" id="progSteps"></div>
-  </div>
-
-  <!-- ERROR -->
-  <div class="err-wrap" id="errWrap">
-    <div class="err-icon">⚠</div>
-    <div id="errMsg"></div>
-  </div>
-
-  <!-- RESULTS -->
-  <div id="results">
-    <div class="res-header">
-      <div>
-        <div class="res-domain">Results for <span id="resDomain"></span></div>
-        <div class="res-meta" id="resMeta"></div>
-      </div>
-      <div class="grade-block">
-        <div class="score-block">
-          <div class="score-num" id="resScore">—</div>
-          <div class="score-lbl">Score</div>
-        </div>
-        <div class="grade-ring grade-A" id="gradeRing">
-          <div class="grade-letter" id="gradeLetter">—</div>
-          <div class="grade-word" id="gradeWord">Grade</div>
+  <!-- SINGLE SCAN TAB -->
+  <div class="tab-panel active" id="tab-single">
+    <div class="scanner-card">
+      <div class="scanner-top">
+        <div class="scanner-label">Target Domain</div>
+        <div class="input-row">
+          <input class="domain-field" id="domainInput" type="text" placeholder="example.com" autocomplete="off" spellcheck="false"/>
+          <button class="scan-trigger" id="scanBtn" onclick="startScan()">▶ Scan Now</button>
         </div>
       </div>
-    </div>
-
-    <!-- Stats -->
-    <div class="stats-strip">
-      <div class="stat-tile tc"><div class="stat-n nc" id="sC">0</div><div class="stat-l">Critical</div></div>
-      <div class="stat-tile th"><div class="stat-n nh" id="sH">0</div><div class="stat-l">High</div></div>
-      <div class="stat-tile tm"><div class="stat-n nm" id="sM">0</div><div class="stat-l">Medium</div></div>
-      <div class="stat-tile tl"><div class="stat-n nl" id="sL">0</div><div class="stat-l">Low</div></div>
-      <div class="stat-tile tp"><div class="stat-n np" id="sP">0</div><div class="stat-l">Passed</div></div>
-    </div>
-
-    <!-- Analyzer breakdown -->
-    <div class="breakdown" id="breakdown"></div>
-
-    <!-- Findings -->
-    <div class="findings-hdr">
-      <div class="findings-title">// Findings</div>
-      <div class="filter-tabs">
-        <div class="ftab active" onclick="filterFindings('all',this)">All</div>
-        <div class="ftab" onclick="filterFindings('fail',this)">Failed</div>
-        <div class="ftab" onclick="filterFindings('pass',this)">Passed</div>
+      <div class="checks-row">
+        <label class="chk active"><input type="checkbox" id="cSPF" checked onchange="toggleChk(this)"> SPF</label>
+        <label class="chk active"><input type="checkbox" id="cDMARC" checked onchange="toggleChk(this)"> DMARC</label>
+        <label class="chk active"><input type="checkbox" id="cDKIM" checked onchange="toggleChk(this)"> DKIM</label>
+        <label class="chk active"><input type="checkbox" id="cDNSSEC" checked onchange="toggleChk(this)"> DNSSEC</label>
+        <label class="chk active"><input type="checkbox" id="cAXFR" checked onchange="toggleChk(this)"> Zone Transfer</label>
+        <label class="chk active"><input type="checkbox" id="cCAA" checked onchange="toggleChk(this)"> CAA</label>
+        <label class="chk active"><input type="checkbox" id="cMTA" checked onchange="toggleChk(this)"> MTA-STS</label>
+        <label class="chk active"><input type="checkbox" id="cTTL" checked onchange="toggleChk(this)"> TTL</label>
+        <label class="chk"><input type="checkbox" id="cSUB" onchange="toggleChk(this)"> Subdomains</label>
+      </div>
+      <div class="apikey-row">
+        <span class="apikey-lbl">API Key</span>
+        <input class="apikey-field" id="apiKeyInput" type="password" placeholder="Optional — leave blank to scan without auth"/>
       </div>
     </div>
-    <div id="findingsList"></div>
+
+    <div class="progress-wrap" id="progressWrap">
+      <div class="prog-head">
+        <div class="spin"></div>
+        <div>
+          <div class="prog-title" id="progTitle">Initializing scan...</div>
+          <div class="prog-sub" id="progSub">Connecting to DNS resolvers</div>
+        </div>
+      </div>
+      <div class="prog-bar-wrap"><div class="prog-bar" id="progBar"></div></div>
+      <div class="prog-steps" id="progSteps"></div>
+    </div>
+
+    <div class="err-wrap" id="errWrap"><div class="err-icon">⚠</div><div id="errMsg"></div></div>
+
+    <div id="results">
+      <div class="res-header">
+        <div>
+          <div class="res-domain">Results for <span id="resDomain"></span></div>
+          <div class="res-meta" id="resMeta"></div>
+        </div>
+        <div class="grade-block">
+          <div class="score-block">
+            <div class="score-num" id="resScore">—</div>
+            <div class="score-lbl">Score</div>
+          </div>
+          <div class="grade-ring grade-A" id="gradeRing">
+            <div class="grade-letter" id="gradeLetter">—</div>
+            <div class="grade-word" id="gradeWord">Grade</div>
+          </div>
+        </div>
+      </div>
+      <div class="stats-strip">
+        <div class="stat-tile tc"><div class="stat-n nc" id="sC">0</div><div class="stat-l">Critical</div></div>
+        <div class="stat-tile th"><div class="stat-n nh" id="sH">0</div><div class="stat-l">High</div></div>
+        <div class="stat-tile tm"><div class="stat-n nm" id="sM">0</div><div class="stat-l">Medium</div></div>
+        <div class="stat-tile tl"><div class="stat-n nl" id="sL">0</div><div class="stat-l">Low</div></div>
+        <div class="stat-tile tp"><div class="stat-n np" id="sP">0</div><div class="stat-l">Passed</div></div>
+      </div>
+      <div class="breakdown" id="breakdown"></div>
+      <div class="findings-hdr">
+        <div class="findings-title">// Findings</div>
+        <div class="filter-tabs">
+          <div class="ftab active" onclick="filterFindings('all',this)">All</div>
+          <div class="ftab" onclick="filterFindings('fail',this)">Failed</div>
+          <div class="ftab" onclick="filterFindings('pass',this)">Passed</div>
+        </div>
+      </div>
+      <div id="findingsList"></div>
+
+      <!-- AI FIX RECOMMENDATIONS -->
+      <div class="ai-panel" id="aiPanel">
+        <div class="ai-header">
+          <div class="ai-title">
+            <span class="ai-title-icon">🤖</span>
+            AI Security Advisor
+            <span class="ai-badge">POWERED BY CLAUDE</span>
+          </div>
+          <button class="ai-btn" id="aiBtn" onclick="getAIRecommendations()">✨ Get Fix Plan</button>
+        </div>
+        <div class="ai-body" id="aiBody">
+          <div class="ai-placeholder">
+            <div class="ai-placeholder-icon">🧠</div>
+            <div>Click "Get Fix Plan" to get a personalized AI-generated remediation plan based on your scan findings.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="histSection" style="display:none">
+      <div class="hist-hdr">Recent Scans</div>
+      <div id="histList"></div>
+    </div>
   </div>
 
-  <!-- HISTORY -->
-  <div id="histSection" style="display:none">
-    <div class="hist-hdr">Recent Scans</div>
-    <div id="histList"></div>
+  <!-- BULK SCANNER TAB -->
+  <div class="tab-panel" id="tab-bulk">
+    <div class="bulk-card">
+      <div class="bulk-top">
+        <div class="bulk-label">Bulk Domain Scanner — Scan up to 50 domains at once</div>
+        <div class="bulk-methods">
+          <button class="method-btn active" onclick="switchBulkMethod('text',this)">📝 Paste Domains</button>
+          <button class="method-btn" onclick="switchBulkMethod('csv',this)">📁 Upload CSV</button>
+        </div>
+        <div id="bulk-text-input">
+          <textarea class="bulk-textarea" id="bulkDomainsText"
+            placeholder="Enter one domain per line:&#10;google.com&#10;microsoft.com&#10;tesla.com&#10;amazon.com"></textarea>
+        </div>
+        <div id="bulk-csv-input" style="display:none">
+          <div class="bulk-upload-area" onclick="document.getElementById('csvFile').click()">
+            <input type="file" id="csvFile" accept=".csv,.txt" onchange="handleCSV(this)"/>
+            <div class="upload-icon">📂</div>
+            <div class="upload-txt">Click to upload CSV or TXT file</div>
+            <div class="upload-sub">One domain per line or comma-separated</div>
+          </div>
+        </div>
+      </div>
+      <div class="bulk-bottom">
+        <div class="bulk-info">Domains detected: <span id="domainCount">0</span> &nbsp;·&nbsp; Max 50 per batch</div>
+        <button class="bulk-trigger" id="bulkBtn" onclick="startBulkScan()">▶ Scan All Domains</button>
+      </div>
+    </div>
+
+    <div class="bulk-results" id="bulkResults">
+      <div class="bulk-res-header">
+        <div class="bulk-res-title">Bulk Scan Results</div>
+        <button class="bulk-export-btn" onclick="exportCSV()">⬇ Export CSV</button>
+      </div>
+      <div class="bulk-progress-row" id="bulkProgressRow" style="display:none">
+        <span id="bulkProgressText">Scanning 0/0 domains...</span>
+        <div class="bulk-progress-bar"><div class="bulk-progress-fill" id="bulkProgressFill"></div></div>
+      </div>
+      <table class="bulk-table">
+        <thead>
+          <tr>
+            <th>Domain</th>
+            <th>Status</th>
+            <th>Grade</th>
+            <th>Score</th>
+            <th>Critical</th>
+            <th>High</th>
+            <th>Passed</th>
+          </tr>
+        </thead>
+        <tbody id="bulkTableBody"></tbody>
+      </table>
+    </div>
   </div>
 
   <!-- FEATURES -->
   <div class="feat-grid">
-    <div class="feat-card"><div class="feat-ico">📧</div><div class="feat-name">Email Security</div><div class="feat-txt">Validates SPF, DMARC, and DKIM records to prevent spoofing and phishing attacks on your domain.</div></div>
-    <div class="feat-card"><div class="feat-ico">🔐</div><div class="feat-name">DNSSEC Validation</div><div class="feat-txt">Verifies cryptographic chain of trust from root to your zone, detecting tampering or hijacking.</div></div>
-    <div class="feat-card"><div class="feat-ico">🗺️</div><div class="feat-name">Zone Transfer Test</div><div class="feat-txt">Attempts AXFR against each nameserver to detect exposure of your full DNS infrastructure.</div></div>
-    <div class="feat-card"><div class="feat-ico">🔍</div><div class="feat-name">Subdomain Discovery</div><div class="feat-txt">Wordlist-based enumeration to surface forgotten subdomains pointing at abandoned services.</div></div>
-    <div class="feat-card"><div class="feat-ico">🏷️</div><div class="feat-name">CAA Records</div><div class="feat-txt">Checks Certificate Authority Authorization to prevent unauthorized SSL certificate issuance.</div></div>
-    <div class="feat-card"><div class="feat-ico">📊</div><div class="feat-name">Security Scoring</div><div class="feat-txt">Every scan produces an A–F grade and 0–100 score so you can benchmark and track progress.</div></div>
+    <div class="feat-card"><div class="feat-ico">📧</div><div class="feat-name">Email Security</div><div class="feat-txt">Validates SPF, DMARC, and DKIM records to prevent spoofing and phishing attacks.</div></div>
+    <div class="feat-card"><div class="feat-ico">🔐</div><div class="feat-name">DNSSEC Validation</div><div class="feat-txt">Verifies cryptographic chain of trust from root to your zone, detecting tampering.</div></div>
+    <div class="feat-card"><div class="feat-ico">🗺️</div><div class="feat-name">Zone Transfer Test</div><div class="feat-txt">Attempts AXFR against nameservers to detect exposure of your full DNS infrastructure.</div></div>
+    <div class="feat-card"><div class="feat-ico">🤖</div><div class="feat-name">AI Fix Recommendations</div><div class="feat-txt">Claude AI analyzes your findings and generates a prioritized, actionable remediation plan.</div></div>
+    <div class="feat-card"><div class="feat-ico">📋</div><div class="feat-name">Bulk Scanning</div><div class="feat-txt">Scan up to 50 domains at once, export results to CSV for reporting and audits.</div></div>
+    <div class="feat-card"><div class="feat-ico">📊</div><div class="feat-name">Security Scoring</div><div class="feat-txt">Every scan produces an A–F grade and 0–100 score to benchmark and track progress.</div></div>
   </div>
-
-</div><!-- /page -->
+</div>
 
 <footer>
   DNS Security Analyzer &nbsp;·&nbsp;
@@ -428,26 +533,64 @@ footer a:hover{text-decoration:underline}
 <script>
 const API = '/api/v1';
 let allFindings = [];
+let currentDomain = '';
+let currentScanData = null;
+let bulkResults = [];
 let scanHistory = [];
 try { scanHistory = JSON.parse(localStorage.getItem('dns_history') || '[]'); } catch {}
 
 const STEPS = [
-  'Resolving nameservers',
-  'Checking SPF record',
-  'Validating DMARC',
-  'Testing DKIM selectors',
-  'DNSSEC chain check',
-  'Zone transfer test',
-  'CAA record check',
-  'Scoring findings'
+  'Resolving nameservers','Checking SPF record','Validating DMARC',
+  'Testing DKIM selectors','DNSSEC chain check','Zone transfer test',
+  'CAA record check','Scoring findings'
 ];
 
-// ── Checkbox toggle ───────────────────────────────────────────────────────────
+// ── TABS ──────────────────────────────────────────────────────────────────────
+function switchTab(name, btn) {
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// ── BULK METHOD ───────────────────────────────────────────────────────────────
+function switchBulkMethod(method, btn) {
+  document.querySelectorAll('.method-btn').forEach(b => b.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById('bulk-text-input').style.display = method === 'text' ? 'block' : 'none';
+  document.getElementById('bulk-csv-input').style.display = method === 'csv' ? 'block' : 'none';
+}
+
+function handleCSV(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const text = e.target.result;
+    const domains = text.split(/[\n,\r]+/).map(d => d.trim()).filter(d => d && d.includes('.'));
+    document.getElementById('bulkDomainsText').value = domains.join('\n');
+    switchBulkMethod('text', document.querySelectorAll('.method-btn')[0]);
+    updateDomainCount();
+  };
+  reader.readAsText(file);
+}
+
+function updateDomainCount() {
+  const raw = document.getElementById('bulkDomainsText').value;
+  const domains = raw.split('\n').map(d => d.trim()).filter(d => d && d.includes('.'));
+  document.getElementById('domainCount').textContent = Math.min(domains.length, 50);
+}
+document.addEventListener('DOMContentLoaded', () => {
+  const ta = document.getElementById('bulkDomainsText');
+  if (ta) ta.addEventListener('input', updateDomainCount);
+});
+
+// ── CHECKBOX TOGGLE ───────────────────────────────────────────────────────────
 function toggleChk(el) {
   el.closest('.chk').classList.toggle('active', el.checked);
 }
 
-// ── Health ────────────────────────────────────────────────────────────────────
+// ── HEALTH ────────────────────────────────────────────────────────────────────
 async function checkHealth() {
   try {
     const r = await fetch(`${API}/health`);
@@ -455,225 +598,126 @@ async function checkHealth() {
     const dot = document.getElementById('liveDot');
     const txt = document.getElementById('liveText');
     if (d.database?.status === 'ok') {
-      dot.className = 'live-dot on';
-      txt.textContent = 'System online';
-    } else {
-      dot.className = 'live-dot';
-      txt.textContent = 'Degraded';
-    }
-  } catch {
-    document.getElementById('liveText').textContent = 'Offline';
-  }
+      dot.className = 'live-dot on'; txt.textContent = 'System online';
+    } else { dot.className = 'live-dot'; txt.textContent = 'Degraded'; }
+  } catch { document.getElementById('liveText').textContent = 'Offline'; }
 }
 
-// ── Start scan ────────────────────────────────────────────────────────────────
+// ── SINGLE SCAN ───────────────────────────────────────────────────────────────
 async function startScan() {
   const domain = document.getElementById('domainInput').value.trim();
   if (!domain) { showErr('Please enter a domain name.'); return; }
-
   const apiKey = document.getElementById('apiKeyInput').value.trim();
-
-  const checkMap = {
-    cSPF:'spf', cDMARC:'dmarc', cDKIM:'dkim', cDNSSEC:'dnssec',
-    cAXFR:'axfr', cCAA:'caa', cMTA:'mta_sts', cTTL:'ttl', cSUB:'subdomain'
-  };
-  const analyzers = Object.entries(checkMap)
-    .filter(([id]) => document.getElementById(id)?.checked)
-    .map(([,name]) => name);
-
-  hideErr();
-  hideResults();
+  const checkMap = { cSPF:'spf',cDMARC:'dmarc',cDKIM:'dkim',cDNSSEC:'dnssec',cAXFR:'axfr',cCAA:'caa',cMTA:'mta_sts',cTTL:'ttl',cSUB:'subdomain' };
+  const analyzers = Object.entries(checkMap).filter(([id]) => document.getElementById(id)?.checked).map(([,n]) => n);
+  hideErr(); hideResults();
   showProgress('Initiating scan...', 'Connecting to DNS infrastructure');
-  setSteps(0);
-  setBar(8);
+  setSteps(0); setBar(8);
   document.getElementById('scanBtn').disabled = true;
-
   try {
     const headers = { 'Content-Type': 'application/json' };
     if (apiKey) headers['X-API-Key'] = apiKey;
-
-    const r = await fetch(`${API}/scan`, {
-      method: 'POST', headers,
-      body: JSON.stringify({ domain, analyzers, include_intel: false })
-    });
+    const r = await fetch(`${API}/scan`, { method:'POST', headers, body: JSON.stringify({ domain, analyzers, include_intel:false }) });
     const data = await r.json();
-
-    if (!r.ok) {
-      const msg = data?.detail?.message || data?.message || JSON.stringify(data);
-      throw new Error(msg);
-    }
-
-    setBar(20);
-    updateProgress('Scan queued', `ID: ${data.id}`);
+    if (!r.ok) throw new Error(data?.detail?.message || data?.message || JSON.stringify(data));
+    setBar(20); updateProgress('Scan queued', `ID: ${data.id}`);
     poll(data.id, domain, apiKey);
-
-  } catch (err) {
-    showErr('Error: ' + err.message);
-    hideProgress();
+  } catch(err) {
+    showErr('Error: ' + err.message); hideProgress();
     document.getElementById('scanBtn').disabled = false;
   }
 }
 
-// ── Poll ──────────────────────────────────────────────────────────────────────
 function poll(scanId, domain, apiKey) {
-  let attempts = 0;
-  let stepIdx = 0;
-
+  let attempts = 0, stepIdx = 0;
   const iv = setInterval(async () => {
     attempts++;
-    const pct = Math.min(20 + (attempts / 150) * 70, 88);
-    setBar(pct);
-
+    setBar(Math.min(20 + (attempts / 150) * 70, 88));
     if (attempts % 4 === 0 && stepIdx < STEPS.length) {
-      updateProgress('Running analysis...', STEPS[stepIdx]);
-      setSteps(stepIdx);
-      stepIdx++;
+      updateProgress('Running analysis...', STEPS[stepIdx]); setSteps(stepIdx); stepIdx++;
     }
-
     if (attempts > 150) {
       clearInterval(iv);
-      showErr('Scan timed out. The domain may be unreachable. Please try again.');
-      hideProgress();
-      document.getElementById('scanBtn').disabled = false;
-      return;
+      showErr('Scan timed out. Please try again.');
+      hideProgress(); document.getElementById('scanBtn').disabled = false; return;
     }
-
     try {
-      const headers = {};
-      if (apiKey) headers['X-API-Key'] = apiKey;
+      const headers = {}; if (apiKey) headers['X-API-Key'] = apiKey;
       const r = await fetch(`${API}/scan/${scanId}`, { headers });
       const data = await r.json();
-
       if (data.status === 'completed') {
-        clearInterval(iv);
-        setBar(100);
-        setSteps(STEPS.length);
-        setTimeout(() => {
-          hideProgress();
-          renderResults(data, domain);
-          document.getElementById('scanBtn').disabled = false;
-          saveHistory(domain, data);
-        }, 500);
+        clearInterval(iv); setBar(100); setSteps(STEPS.length);
+        setTimeout(() => { hideProgress(); renderResults(data, domain); document.getElementById('scanBtn').disabled = false; saveHistory(domain, data); }, 500);
       } else if (data.status === 'failed') {
         clearInterval(iv);
         showErr('Scan failed: ' + (data.error_message || 'Unknown error'));
-        hideProgress();
-        document.getElementById('scanBtn').disabled = false;
+        hideProgress(); document.getElementById('scanBtn').disabled = false;
       }
-    } catch { /* keep polling */ }
+    } catch {}
   }, 3000);
 }
 
-// ── Render results ────────────────────────────────────────────────────────────
 function renderResults(data, domain) {
+  currentDomain = domain; currentScanData = data;
   document.getElementById('resDomain').textContent = domain;
   const ts = data.completed_at ? new Date(data.completed_at).toLocaleString() : '';
   const dur = data.duration_ms ? ` · ${(data.duration_ms/1000).toFixed(1)}s` : '';
   document.getElementById('resMeta').textContent = ts + dur;
-
-  const score = data.score ?? 0;
-  const grade = data.grade ?? '?';
+  const score = data.score ?? 0, grade = data.grade ?? '?';
   document.getElementById('resScore').textContent = score;
   document.getElementById('gradeLetter').textContent = grade;
-  document.getElementById('gradeWord').textContent = gradeWord(grade);
-  const gr = document.getElementById('gradeRing');
-  gr.className = 'grade-ring grade-' + grade.charAt(0);
-
+  document.getElementById('gradeWord').textContent = {A:'Excellent',B:'Good',C:'Fair',D:'Poor',F:'Critical'}[grade]||'Unknown';
+  document.getElementById('gradeRing').className = 'grade-ring grade-' + grade.charAt(0);
   allFindings = data.findings || [];
-  let c=0,h=0,m=0,l=0,p=0;
-  const azMap = {};
-
+  let c=0,h=0,m=0,l=0,p=0; const azMap = {};
   allFindings.forEach(f => {
-    const az = f.analyzer || 'unknown';
-    if (!azMap[az]) azMap[az] = { pass:0, fail:0, sev:[] };
+    const az = f.analyzer||'unknown';
+    if (!azMap[az]) azMap[az] = {pass:0,fail:0,sev:[]};
     if (f.passed) { p++; azMap[az].pass++; }
-    else {
-      const s = (f.severity||'').toLowerCase();
-      azMap[az].fail++;
-      azMap[az].sev.push(s);
-      if (s==='critical') c++;
-      else if (s==='high') h++;
-      else if (s==='medium') m++;
-      else l++;
-    }
+    else { const s=(f.severity||'').toLowerCase(); azMap[az].fail++; azMap[az].sev.push(s);
+      if(s==='critical')c++; else if(s==='high')h++; else if(s==='medium')m++; else l++; }
   });
-
-  document.getElementById('sC').textContent = c;
-  document.getElementById('sH').textContent = h;
-  document.getElementById('sM').textContent = m;
-  document.getElementById('sL').textContent = l;
-  document.getElementById('sP').textContent = p;
-
-  // Breakdown
-  const bd = document.getElementById('breakdown');
-  bd.innerHTML = '';
-  const sevPriority = {critical:0,high:1,medium:2,low:3,info:4};
-  Object.entries(azMap).forEach(([name, info]) => {
-    const topSev = info.fail === 0 ? 'pass'
-      : info.sev.sort((a,b)=>(sevPriority[a]??5)-(sevPriority[b]??5))[0];
-    const dotColor = {
-      pass:'var(--green)',critical:'var(--red)',high:'var(--orange)',
-      medium:'var(--yellow)',low:'var(--blue2)',info:'var(--muted)'
-    }[topSev] || 'var(--muted)';
-    const badge = info.fail === 0
-      ? `<span class="az-badge az-pass">PASS</span>`
-      : topSev === 'critical' || topSev === 'high'
-        ? `<span class="az-badge az-fail">${topSev.toUpperCase()}</span>`
-        : `<span class="az-badge az-warn">${topSev.toUpperCase()}</span>`;
-    bd.innerHTML += `
-      <div class="az-card">
-        <div class="az-dot" style="background:${dotColor}"></div>
-        <div class="az-name">${name.toUpperCase()}</div>
-        ${badge}
-      </div>`;
+  document.getElementById('sC').textContent=c; document.getElementById('sH').textContent=h;
+  document.getElementById('sM').textContent=m; document.getElementById('sL').textContent=l;
+  document.getElementById('sP').textContent=p;
+  const bd = document.getElementById('breakdown'); bd.innerHTML='';
+  const sp = {critical:0,high:1,medium:2,low:3,info:4};
+  Object.entries(azMap).forEach(([name,info]) => {
+    const topSev = info.fail===0?'pass':info.sev.sort((a,b)=>(sp[a]??5)-(sp[b]??5))[0];
+    const dc = {pass:'var(--green)',critical:'var(--red)',high:'var(--orange)',medium:'var(--yellow)',low:'var(--blue2)',info:'var(--muted)'}[topSev]||'var(--muted)';
+    const badge = info.fail===0?`<span class="az-badge az-pass">PASS</span>`:topSev==='critical'||topSev==='high'?`<span class="az-badge az-fail">${topSev.toUpperCase()}</span>`:`<span class="az-badge az-warn">${topSev.toUpperCase()}</span>`;
+    bd.innerHTML+=`<div class="az-card"><div class="az-dot" style="background:${dc}"></div><div class="az-name">${name.toUpperCase()}</div>${badge}</div>`;
   });
-
   renderFindings('all');
+  // Reset AI panel
+  document.getElementById('aiBody').innerHTML = `<div class="ai-placeholder"><div class="ai-placeholder-icon">🧠</div><div>Click "Get Fix Plan" to get a personalized AI-generated remediation plan based on your scan findings.</div></div>`;
+  document.getElementById('aiBtn').disabled = false;
   const el = document.getElementById('results');
-  el.className = 'show';
-  el.scrollIntoView({ behavior:'smooth', block:'start' });
+  el.className='show'; el.scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 function renderFindings(filter) {
-  const sevOrd = {critical:0,high:1,medium:2,low:3,info:4};
-  let list = [...allFindings];
-  if (filter === 'fail') list = list.filter(f=>!f.passed);
-  if (filter === 'pass') list = list.filter(f=>f.passed);
-
-  list.sort((a,b) => {
-    if (a.passed !== b.passed) return a.passed?1:-1;
-    return (sevOrd[(a.severity||'').toLowerCase()]??5) - (sevOrd[(b.severity||'').toLowerCase()]??5);
-  });
-
-  const el = document.getElementById('findingsList');
-  el.innerHTML = '';
-  if (!list.length) {
-    el.innerHTML = '<div style="color:var(--muted);font-size:.8rem;padding:.8rem">No findings.</div>';
-    return;
-  }
-
-  list.forEach((f, i) => {
-    const sev = f.passed ? 'pass' : (f.severity||'info').toLowerCase();
-    const icon = f.passed ? '✅' : {critical:'🔴',high:'🟠',medium:'🟡',low:'🔵',info:'⚪'}[sev]||'⚪';
-    const sevClass = `sev-${sev==='pass'?'info':sev}`;
-
-    const remHtml = !f.passed && f.remediation
-      ? `<div class="remediation">${f.remediation}</div>` : '';
-    const evHtml = f.evidence
-      ? `<div class="evidence-block">${f.evidence}</div>` : '';
-    const refHtml = f.reference_url
-      ? `<div style="margin-top:.4rem"><a href="${f.reference_url}" target="_blank" style="font-size:.7rem;color:var(--cyan)">📖 Reference</a></div>` : '';
-    const cvssHtml = f.cvss_score
-      ? `<span class="mini-tag">CVSS ${f.cvss_score}</span>` : '';
-
-    el.innerHTML += `
-    <div class="finding" id="f${i}" onclick="toggleFinding(${i})">
+  const sevOrd={critical:0,high:1,medium:2,low:3,info:4};
+  let list=[...allFindings];
+  if(filter==='fail') list=list.filter(f=>!f.passed);
+  if(filter==='pass') list=list.filter(f=>f.passed);
+  list.sort((a,b)=>{if(a.passed!==b.passed)return a.passed?1:-1;return(sevOrd[(a.severity||'').toLowerCase()]??5)-(sevOrd[(b.severity||'').toLowerCase()]??5);});
+  const el=document.getElementById('findingsList'); el.innerHTML='';
+  if(!list.length){el.innerHTML='<div style="color:var(--muted);font-size:.8rem;padding:.8rem">No findings.</div>';return;}
+  list.forEach((f,i)=>{
+    const sev=f.passed?'pass':(f.severity||'info').toLowerCase();
+    const icon=f.passed?'✅':{critical:'🔴',high:'🟠',medium:'🟡',low:'🔵',info:'⚪'}[sev]||'⚪';
+    const remHtml=!f.passed&&f.remediation?`<div class="remediation">${f.remediation}</div>`:'';
+    const evHtml=f.evidence?`<div class="evidence-block">${f.evidence}</div>`:'';
+    const refHtml=f.reference_url?`<div style="margin-top:.4rem"><a href="${f.reference_url}" target="_blank" style="font-size:.7rem;color:var(--cyan)">📖 Reference</a></div>`:'';
+    const cvssHtml=f.cvss_score?`<span class="mini-tag">CVSS ${f.cvss_score}</span>`:'';
+    el.innerHTML+=`<div class="finding" id="f${i}" onclick="toggleFinding(${i})">
       <div class="finding-top">
-        <div class="finding-sev ${sevClass}"></div>
+        <div class="finding-sev sev-${sev==='pass'?'info':sev}"></div>
         <div class="finding-icon">${icon}</div>
         <div class="finding-main">
-          <div class="finding-name">${f.title || f.check_name}</div>
-          <div class="finding-check">${f.analyzer || ''} · ${f.check_name || ''}</div>
+          <div class="finding-name">${f.title||f.check_name}</div>
+          <div class="finding-check">${f.analyzer||''} · ${f.check_name||''}</div>
         </div>
         <div class="finding-right">
           <span class="sev-tag ${sev==='pass'?'pass':sev}">${sev==='pass'?'PASS':sev.toUpperCase()}</span>
@@ -681,105 +725,236 @@ function renderFindings(filter) {
         </div>
       </div>
       <div class="finding-body">
-        <div class="finding-desc">${f.description || ''}</div>
-        <div class="finding-row">
-          <span class="mini-tag">${f.analyzer||''}</span>
-          ${f.affected_record?`<span class="mini-tag" style="color:var(--muted2);font-size:.6rem;max-width:300px;overflow:hidden;text-overflow:ellipsis">${f.affected_record}</span>`:''}
-          ${cvssHtml}
-        </div>
-        ${evHtml}
-        ${remHtml}
-        ${refHtml}
+        <div class="finding-desc">${f.description||''}</div>
+        <div class="finding-row"><span class="mini-tag">${f.analyzer||''}</span>${f.affected_record?`<span class="mini-tag" style="font-size:.6rem;max-width:280px;overflow:hidden;text-overflow:ellipsis">${f.affected_record}</span>`:''}${cvssHtml}</div>
+        ${evHtml}${remHtml}${refHtml}
       </div>
     </div>`;
   });
 }
 
-function toggleFinding(i) {
-  const el = document.getElementById('f'+i);
-  el.classList.toggle('open');
+function toggleFinding(i){document.getElementById('f'+i).classList.toggle('open')}
+function filterFindings(type,btn){document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));btn.classList.add('active');renderFindings(type);}
+
+// ── AI RECOMMENDATIONS ────────────────────────────────────────────────────────
+async function getAIRecommendations() {
+  if (!currentScanData) return;
+  const btn = document.getElementById('aiBtn');
+  const body = document.getElementById('aiBody');
+  btn.disabled = true;
+  body.innerHTML = `<div class="ai-loading"><div class="ai-spin"></div><span>Claude is analyzing your ${allFindings.length} findings and generating a personalized fix plan...</span></div>`;
+
+  const failed = allFindings.filter(f => !f.passed);
+  const summary = failed.map(f =>
+    `- [${(f.severity||'info').toUpperCase()}] ${f.title}: ${f.description}${f.remediation ? ' | Fix: ' + f.remediation : ''}`
+  ).join('\n');
+
+  const prompt = `You are a DNS security expert. Analyze these DNS security findings for the domain "${currentDomain}" (Score: ${currentScanData.score}/100, Grade: ${currentScanData.grade}) and provide a clear, actionable remediation plan.
+
+FINDINGS:
+${summary || 'No critical failures found.'}
+
+PASSED CHECKS: ${allFindings.filter(f=>f.passed).map(f=>f.title).join(', ')||'None'}
+
+Provide your response in this exact format:
+
+## 🎯 Executive Summary
+[2-3 sentence overview of the security posture]
+
+## 🔴 Fix Immediately (Critical/High)
+[List each critical/high finding with exact DNS record changes needed]
+
+## 🟡 Fix Soon (Medium)
+[List medium findings with specific steps]
+
+## 🟢 Improvements (Low/Info)
+[List low-priority improvements]
+
+## ✅ What's Working Well
+[List what's configured correctly]
+
+## 📋 Priority Action Plan
+[Numbered list of top 5 actions in order of importance]
+
+Be specific — include exact DNS record syntax where applicable. Keep each section concise and technical.`;
+
+  try {
+    const response = await fetch('https://api.anthropic.com/v1/messages', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        messages: [{ role: 'user', content: prompt }]
+      })
+    });
+    const data = await response.json();
+    if (!response.ok) throw new Error(data?.error?.message || 'API error');
+    const text = data.content?.[0]?.text || '';
+    body.innerHTML = `<div class="ai-content">${formatAIResponse(text)}</div>`;
+  } catch(err) {
+    body.innerHTML = `<div style="color:var(--red2);font-size:.8rem;padding:.5rem">⚠ AI recommendations unavailable: ${err.message}</div>`;
+    btn.disabled = false;
+  }
 }
 
-function filterFindings(type, btn) {
-  document.querySelectorAll('.ftab').forEach(t=>t.classList.remove('active'));
-  btn.classList.add('active');
-  renderFindings(type);
+function formatAIResponse(text) {
+  return text
+    .replace(/^## (.+)$/gm, '<h3>$1</h3>')
+    .replace(/^\*\*(.+)\*\*$/gm, '<strong>$1</strong>')
+    .replace(/`([^`]+)`/g, '<code>$1</code>')
+    .replace(/^\- (.+)$/gm, '<li>$1</li>')
+    .replace(/(<li>.*<\/li>\n?)+/gs, '<ul>$&</ul>')
+    .replace(/^\d+\. (.+)$/gm, '<li>$1</li>')
+    .replace(/\n\n/g, '</p><p>')
+    .replace(/^(?!<[hul])/gm, '')
+    .replace(/<p><\/p>/g, '')
+    || `<p>${text}</p>`;
 }
 
-function gradeWord(g) {
-  return {A:'Excellent',B:'Good',C:'Fair',D:'Poor',F:'Critical'}[g]||'Unknown';
+// ── BULK SCANNER ──────────────────────────────────────────────────────────────
+async function startBulkScan() {
+  const raw = document.getElementById('bulkDomainsText').value;
+  const domains = raw.split('\n').map(d => d.trim().toLowerCase()).filter(d => d && d.includes('.')).slice(0, 50);
+  if (!domains.length) { alert('Please enter at least one domain.'); return; }
+
+  bulkResults = [];
+  document.getElementById('bulkBtn').disabled = true;
+  document.getElementById('bulkResults').className = 'bulk-results show';
+  document.getElementById('bulkProgressRow').style.display = 'block';
+  const tbody = document.getElementById('bulkTableBody');
+  tbody.innerHTML = '';
+
+  // Init rows
+  domains.forEach(d => {
+    tbody.innerHTML += `<tr id="br-${CSS.escape(d)}">
+      <td class="domain-cell">${d}</td>
+      <td><div class="status-cell"><div class="status-dot-sm" style="background:var(--muted)"></div><span>Queued</span></div></td>
+      <td>—</td><td>—</td><td>—</td><td>—</td><td>—</td>
+    </tr>`;
+  });
+
+  let completed = 0;
+  const apiKey = document.getElementById('apiKeyInput').value.trim();
+
+  for (const domain of domains) {
+    updateBulkRow(domain, 'scanning', null);
+    updateBulkProgress(completed, domains.length);
+    try {
+      const headers = { 'Content-Type': 'application/json' };
+      if (apiKey) headers['X-API-Key'] = apiKey;
+      const r = await fetch(`${API}/scan`, {
+        method: 'POST', headers,
+        body: JSON.stringify({ domain, analyzers: ['spf','dmarc','dkim','dnssec','axfr','caa'], include_intel: false })
+      });
+      const scanData = await r.json();
+      if (!r.ok) { updateBulkRow(domain, 'error', null); completed++; continue; }
+      const result = await pollBulk(scanData.id, apiKey);
+      bulkResults.push({ domain, ...result });
+      updateBulkRow(domain, result.status === 'completed' ? 'done' : 'error', result);
+    } catch { updateBulkRow(domain, 'error', null); }
+    completed++;
+    updateBulkProgress(completed, domains.length);
+  }
+
+  document.getElementById('bulkProgressRow').style.display = 'none';
+  document.getElementById('bulkBtn').disabled = false;
 }
 
-// ── History ───────────────────────────────────────────────────────────────────
+async function pollBulk(scanId, apiKey, maxWait = 120) {
+  for (let i = 0; i < maxWait; i++) {
+    await new Promise(r => setTimeout(r, 3000));
+    try {
+      const headers = {}; if (apiKey) headers['X-API-Key'] = apiKey;
+      const r = await fetch(`${API}/scan/${scanId}`, { headers });
+      const data = await r.json();
+      if (data.status === 'completed' || data.status === 'failed') return data;
+    } catch {}
+  }
+  return { status: 'failed' };
+}
+
+function updateBulkRow(domain, state, data) {
+  const row = document.getElementById('br-' + CSS.escape(domain));
+  if (!row) return;
+  const stateMap = {
+    scanning: ['var(--cyan)', 'Scanning...'],
+    done: ['var(--green)', 'Complete'],
+    error: ['var(--red)', 'Failed']
+  };
+  const [color, label] = stateMap[state] || ['var(--muted)', 'Queued'];
+  if (!data || state !== 'done') {
+    row.cells[1].innerHTML = `<div class="status-cell"><div class="status-dot-sm" style="background:${color}"></div><span>${label}</span></div>`;
+    return;
+  }
+  const findings = data.findings || [];
+  let c=0,h=0,p=0;
+  findings.forEach(f => { if(f.passed){p++;}else{const s=(f.severity||'').toLowerCase();if(s==='critical')c++;else if(s==='high')h++;} });
+  const gc = {A:'var(--green)',B:'#44ffaa',C:'var(--yellow)',D:'var(--orange)',F:'var(--red)'}[data.grade]||'var(--muted)';
+  row.cells[1].innerHTML = `<div class="status-cell"><div class="status-dot-sm" style="background:var(--green)"></div><span>Complete</span></div>`;
+  row.cells[2].innerHTML = `<span class="bulk-grade" style="color:${gc}">${data.grade||'?'}</span>`;
+  row.cells[3].innerHTML = `<span class="bulk-score">${data.score??'—'}</span>`;
+  row.cells[4].innerHTML = `<span style="color:var(--red);font-weight:600">${c}</span>`;
+  row.cells[5].innerHTML = `<span style="color:var(--orange);font-weight:600">${h}</span>`;
+  row.cells[6].innerHTML = `<span style="color:var(--green)">${p}</span>`;
+}
+
+function updateBulkProgress(done, total) {
+  document.getElementById('bulkProgressText').textContent = `Scanning ${done}/${total} domains...`;
+  document.getElementById('bulkProgressFill').style.width = (done/total*100) + '%';
+}
+
+function exportCSV() {
+  if (!bulkResults.length) return;
+  const rows = [['Domain','Grade','Score','Critical','High','Medium','Low','Passed']];
+  bulkResults.forEach(r => {
+    const f = r.findings||[];
+    let c=0,h=0,m=0,l=0,p=0;
+    f.forEach(x=>{if(x.passed){p++;}else{const s=(x.severity||'').toLowerCase();if(s==='critical')c++;else if(s==='high')h++;else if(s==='medium')m++;else l++;}});
+    rows.push([r.domain, r.grade||'?', r.score??'', c, h, m, l, p]);
+  });
+  const csv = rows.map(r => r.join(',')).join('\n');
+  const a = document.createElement('a');
+  a.href = 'data:text/csv;charset=utf-8,' + encodeURIComponent(csv);
+  a.download = `dns-scan-${new Date().toISOString().slice(0,10)}.csv`;
+  a.click();
+}
+
+// ── HISTORY ───────────────────────────────────────────────────────────────────
 function saveHistory(domain, data) {
   scanHistory.unshift({ domain, grade:data.grade, score:data.score, time:new Date().toLocaleString() });
   scanHistory = scanHistory.slice(0,6);
   try { localStorage.setItem('dns_history', JSON.stringify(scanHistory)); } catch {}
   renderHistory();
 }
-
 function renderHistory() {
   if (!scanHistory.length) return;
   document.getElementById('histSection').style.display='block';
-  const el = document.getElementById('histList');
-  el.innerHTML = '';
-  scanHistory.forEach(h => {
-    const gc = {A:'var(--green)',B:'#44ffaa',C:'var(--yellow)',D:'var(--orange)',F:'var(--red)'}[h.grade]||'var(--muted)';
-    el.innerHTML += `
-    <div class="hist-item" onclick="document.getElementById('domainInput').value='${h.domain}'">
-      <div class="hist-left">
-        <div class="hist-domain">${h.domain}</div>
-        <div class="hist-time">${h.time}</div>
-      </div>
-      <div class="hist-grade" style="color:${gc}">${h.grade||'?'} <span style="font-size:.7rem;color:var(--muted)"> ${h.score??'—'}/100</span></div>
+  const el=document.getElementById('histList'); el.innerHTML='';
+  scanHistory.forEach(h=>{
+    const gc={A:'var(--green)',B:'#44ffaa',C:'var(--yellow)',D:'var(--orange)',F:'var(--red)'}[h.grade]||'var(--muted)';
+    el.innerHTML+=`<div class="hist-item" onclick="document.getElementById('domainInput').value='${h.domain}'">
+      <div><div class="hist-domain">${h.domain}</div><div class="hist-time">${h.time}</div></div>
+      <div class="hist-grade" style="color:${gc}">${h.grade||'?'} <span style="font-size:.7rem;color:var(--muted)">${h.score??'—'}/100</span></div>
     </div>`;
   });
 }
 
-// ── UI helpers ────────────────────────────────────────────────────────────────
-function showProgress(title, sub) {
-  document.getElementById('progTitle').textContent = title;
-  document.getElementById('progSub').textContent = sub;
-  document.getElementById('progressWrap').className = 'progress-wrap show';
-}
-function updateProgress(title, sub) {
-  document.getElementById('progTitle').textContent = title;
-  document.getElementById('progSub').textContent = sub;
-}
-function hideProgress() {
-  document.getElementById('progressWrap').className = 'progress-wrap';
-}
-function setBar(pct) {
-  document.getElementById('progBar').style.width = pct + '%';
-}
-function setSteps(activeIdx) {
-  const el = document.getElementById('progSteps');
-  el.innerHTML = STEPS.map((s,i) =>
-    `<span class="step-item ${i<activeIdx?'done':i===activeIdx?'active':''}">${s}</span>`
-  ).join('');
-}
-function showErr(msg) {
-  const el = document.getElementById('errWrap');
-  document.getElementById('errMsg').textContent = msg;
-  el.className = 'err-wrap show';
-}
-function hideErr() {
-  document.getElementById('errWrap').className = 'err-wrap';
-}
-function hideResults() {
-  document.getElementById('results').className = '';
-  document.getElementById('results').style.display = 'none';
-}
+// ── UI HELPERS ────────────────────────────────────────────────────────────────
+function showProgress(t,s){document.getElementById('progTitle').textContent=t;document.getElementById('progSub').textContent=s;document.getElementById('progressWrap').className='progress-wrap show';}
+function updateProgress(t,s){document.getElementById('progTitle').textContent=t;document.getElementById('progSub').textContent=s;}
+function hideProgress(){document.getElementById('progressWrap').className='progress-wrap';}
+function setBar(p){document.getElementById('progBar').style.width=p+'%';}
+function setSteps(a){document.getElementById('progSteps').innerHTML=STEPS.map((s,i)=>`<span class="step-item ${i<a?'done':i===a?'active':''}">${s}</span>`).join('');}
+function showErr(msg){document.getElementById('errMsg').textContent=msg;document.getElementById('errWrap').className='err-wrap show';}
+function hideErr(){document.getElementById('errWrap').className='err-wrap';}
+function hideResults(){const el=document.getElementById('results');el.className='';el.style.display='none';}
 
-// ── Init ──────────────────────────────────────────────────────────────────────
-document.getElementById('domainInput').addEventListener('keydown', e => {
-  if (e.key === 'Enter') startScan();
-});
-document.getElementById('results').style.display = 'block';
+document.getElementById('domainInput').addEventListener('keydown', e=>{if(e.key==='Enter')startScan();});
+document.getElementById('results').style.display='block';
 checkHealth();
 setInterval(checkHealth, 30000);
 renderHistory();
 </script>
 </body>
 </html>
-
