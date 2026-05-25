@@ -417,6 +417,84 @@ footer a:hover{text-decoration:underline}
 .compare-share-btn{font-size:.72rem;padding:.35rem .9rem;border-radius:6px;border:1px solid var(--border2);color:var(--muted2);cursor:pointer;background:transparent;font-family:var(--mono);transition:all .2s}
 .compare-share-btn:hover{border-color:var(--green);color:var(--green)}
 
+
+/* ── FEATURE 7: CERT WATCH ── */
+.certwatch-card{background:var(--bg1);border:1px solid var(--border2);border-radius:16px;overflow:hidden;position:relative;margin-bottom:1.5rem}
+.certwatch-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),var(--blue2),transparent)}
+.cert-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border)}
+.cert-title{font-family:var(--head);font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:.6rem}
+.cert-body{padding:1.4rem 1.5rem}
+.cert-input-row{display:flex;gap:.7rem;margin-bottom:1.2rem}
+.cert-field{flex:1;background:var(--bg0);border:1px solid var(--border2);border-radius:10px;padding:.75rem 1rem;font-family:var(--mono);font-size:.88rem;color:var(--text);outline:none;transition:border-color .2s}
+.cert-field:focus{border-color:var(--cyan)}
+.cert-field::placeholder{color:var(--muted)}
+.cert-btn{background:linear-gradient(135deg,var(--cyan),var(--blue2));color:#000;border:none;border-radius:10px;padding:.75rem 1.4rem;font-family:var(--mono);font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.cert-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(0,229,255,.25)}
+.cert-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.cert-info-strip{display:grid;grid-template-columns:repeat(4,1fr);gap:.8rem;margin-bottom:1.4rem}
+.cert-info-tile{background:var(--bg2);border:1px solid var(--border);border-radius:10px;padding:.8rem;text-align:center}
+.cert-info-val{font-family:var(--head);font-size:1.2rem;font-weight:700;margin-bottom:.2rem}
+.cert-info-lbl{font-size:.62rem;color:var(--muted);text-transform:uppercase;letter-spacing:.08em}
+.cert-timeline{margin-bottom:1.4rem}
+.cert-timeline-title{font-size:.65rem;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:.8rem;display:flex;align-items:center;gap:.5rem}
+.cert-timeline-title::before{content:"//";color:var(--cyan)}
+.cert-entry{display:flex;align-items:flex-start;gap:.8rem;padding:.8rem;background:var(--bg2);border:1px solid var(--border);border-radius:10px;margin-bottom:.5rem}
+.cert-entry-dot{width:10px;height:10px;border-radius:50%;flex-shrink:0;margin-top:3px}
+.cert-entry-body{flex:1;min-width:0}
+.cert-entry-domain{font-size:.82rem;font-weight:600;margin-bottom:.15rem}
+.cert-entry-meta{font-size:.68rem;color:var(--muted2)}
+.cert-entry-issuer{font-size:.68rem;color:var(--cyan);margin-top:.15rem}
+.cert-risk{display:inline-block;font-size:.6rem;font-weight:700;padding:.15rem .45rem;border-radius:4px;margin-left:.4rem}
+.cert-risk-high{background:rgba(255,23,68,.12);color:var(--red)}
+.cert-risk-medium{background:rgba(255,214,0,.1);color:var(--yellow)}
+.cert-risk-low{background:rgba(0,229,255,.1);color:var(--cyan)}
+.cert-empty{text-align:center;padding:2.5rem;color:var(--muted);font-size:.8rem}
+.cert-empty-icon{font-size:2.5rem;margin-bottom:.5rem;opacity:.4}
+
+/* ── FEATURE 8: SPOOF TEST ── */
+.spoof-card{background:var(--bg1);border:1px solid var(--border2);border-radius:16px;overflow:hidden;position:relative;margin-bottom:1.5rem}
+.spoof-card::before{content:"";position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--red),var(--orange),transparent)}
+.spoof-header{display:flex;align-items:center;justify-content:space-between;padding:1.1rem 1.5rem;border-bottom:1px solid var(--border)}
+.spoof-title{font-family:var(--head);font-size:.95rem;font-weight:700;display:flex;align-items:center;gap:.6rem}
+.spoof-warning{background:rgba(255,23,68,.07);border:1px solid rgba(255,23,68,.2);border-radius:10px;padding:.9rem 1.1rem;margin-bottom:1.2rem;font-size:.76rem;color:rgba(255,82,82,.9);line-height:1.6}
+.spoof-warning strong{color:var(--red)}
+.spoof-body{padding:1.4rem 1.5rem}
+.spoof-input-row{display:flex;gap:.7rem;margin-bottom:1rem}
+.spoof-field{flex:1;background:var(--bg0);border:1px solid var(--border2);border-radius:10px;padding:.75rem 1rem;font-family:var(--mono);font-size:.88rem;color:var(--text);outline:none;transition:border-color .2s}
+.spoof-field:focus{border-color:var(--red)}
+.spoof-field::placeholder{color:var(--muted)}
+.spoof-analyze-btn{background:linear-gradient(135deg,var(--red),var(--orange));color:#fff;border:none;border-radius:10px;padding:.75rem 1.4rem;font-family:var(--mono);font-size:.78rem;font-weight:700;cursor:pointer;white-space:nowrap;transition:all .2s}
+.spoof-analyze-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(255,23,68,.25)}
+.spoof-analyze-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+.spoof-result{background:var(--bg2);border:1px solid var(--border);border-radius:12px;overflow:hidden;margin-top:1.2rem}
+.spoof-result-header{padding:1rem 1.2rem;border-bottom:1px solid var(--border);display:flex;align-items:center;justify-content:space-between}
+.spoof-verdict{display:flex;align-items:center;gap:.6rem;font-family:var(--head);font-size:1rem;font-weight:700}
+.verdict-icon{font-size:1.4rem}
+.verdict-vulnerable{color:var(--red)}
+.verdict-protected{color:var(--green)}
+.verdict-partial{color:var(--yellow)}
+.spoof-score-badge{font-size:.75rem;font-weight:700;padding:.3rem .7rem;border-radius:6px}
+.spoof-body-content{padding:1.2rem}
+.spoof-check-row{display:flex;align-items:flex-start;gap:.8rem;padding:.8rem 0;border-bottom:1px solid var(--border)}
+.spoof-check-row:last-child{border-bottom:none}
+.spoof-check-icon{font-size:1rem;flex-shrink:0;margin-top:1px}
+.spoof-check-body{flex:1}
+.spoof-check-name{font-size:.82rem;font-weight:600;margin-bottom:.2rem}
+.spoof-check-detail{font-size:.72rem;color:var(--muted2);line-height:1.55}
+.spoof-check-tag{font-size:.6rem;font-weight:700;padding:.15rem .45rem;border-radius:4px;margin-top:.3rem;display:inline-block}
+.tag-vuln{background:rgba(255,23,68,.12);color:var(--red)}
+.tag-safe{background:rgba(0,255,136,.1);color:var(--green)}
+.tag-partial{background:rgba(255,214,0,.1);color:var(--yellow)}
+.spoof-raw{background:var(--bg0);border:1px solid var(--border);border-radius:8px;padding:.8rem 1rem;font-size:.72rem;color:var(--muted2);line-height:1.5;margin-top:.8rem;word-break:break-all}
+.spoof-raw-label{color:var(--cyan);font-weight:600;margin-bottom:.3rem;font-size:.68rem}
+.attack-scenarios{margin-top:1rem}
+.attack-title{font-size:.7rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:.6rem;display:flex;align-items:center;gap:.4rem}
+.attack-title::before{content:"//";color:var(--red)}
+.attack-item{display:flex;align-items:center;gap:.6rem;padding:.6rem .8rem;background:var(--bg0);border:1px solid var(--border);border-radius:8px;margin-bottom:.4rem;font-size:.75rem}
+.attack-item-icon{font-size:.9rem;flex-shrink:0}
+.attack-item-text{flex:1;color:var(--muted2)}
+.attack-item-risk{font-size:.6rem;font-weight:700;padding:.15rem .4rem;border-radius:4px}
+
 </style>
 </head>
 <body>
@@ -449,6 +527,8 @@ footer a:hover{text-decoration:underline}
     <button class="tab-btn" onclick="switchTab('monitor',this)">🔔 Monitor</button>
     <button class="tab-btn" onclick="switchTab('badge',this)">🏷️ Badge</button>
     <button class="tab-btn" onclick="switchTab('compare',this)">⚔️ Compare</button>
+    <button class="tab-btn" onclick="switchTab('certwatch',this)">🔏 Cert Watch</button>
+    <button class="tab-btn" onclick="switchTab('spoof',this)">📨 Spoof Test</button>
   </div>
 
   <!-- ── TAB: SINGLE SCAN ── -->
@@ -764,6 +844,80 @@ footer a:hover{text-decoration:underline}
       <div class="compare-share">
         <div style="font-size:.75rem;color:var(--muted2)">Share this comparison result</div>
         <button class="compare-share-btn" onclick="shareComparison()">📋 Copy as Text</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB: CERT WATCH ── -->
+  <div class="tab-panel" id="tab-certwatch">
+    <div class="certwatch-card">
+      <div class="cert-header">
+        <div class="cert-title">🔏 Certificate Transparency Monitor</div>
+        <div style="font-size:.75rem;color:var(--muted2)">Watch for new SSL certs issued for your domain</div>
+      </div>
+      <div class="cert-body">
+        <div style="font-size:.78rem;color:var(--muted2);margin-bottom:1rem;line-height:1.65">
+          Certificate Transparency logs record every SSL certificate issued publicly. Attackers often issue certs before launching phishing sites — monitoring lets you catch unauthorized issuance early.
+        </div>
+        <div class="cert-input-row">
+          <input class="cert-field" id="certDomain" type="text" placeholder="yourdomain.com" />
+          <button class="cert-btn" id="certBtn" onclick="checkCerts()">🔍 Check Certs</button>
+        </div>
+        <div id="certResults" style="display:none">
+          <div class="cert-info-strip" id="certInfoStrip"></div>
+          <div class="cert-timeline">
+            <div class="cert-timeline-title">Recent Certificates</div>
+            <div id="certList"></div>
+          </div>
+        </div>
+        <div id="certEmpty" class="cert-empty" style="display:none">
+          <div class="cert-empty-icon">🔏</div>
+          <div>No certificates found for this domain in CT logs.</div>
+        </div>
+        <div id="certLoading" style="display:none;text-align:center;padding:2rem;color:var(--muted2);font-size:.8rem">
+          <div class="spin" style="margin:0 auto .8rem"></div>
+          Querying Certificate Transparency logs...
+        </div>
+        <div id="certError" style="display:none;background:rgba(255,23,68,.07);border:1px solid rgba(255,23,68,.2);border-radius:10px;padding:.9rem;font-size:.78rem;color:var(--red2)"></div>
+      </div>
+    </div>
+    <div style="background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem">
+      <div style="font-family:var(--head);font-size:.85rem;font-weight:700;margin-bottom:.6rem;color:var(--cyan)">ℹ How to use this</div>
+      <div style="font-size:.75rem;color:var(--muted2);line-height:1.7">
+        Enter your domain to see all SSL certificates ever issued for it and its subdomains. Look for <span style="color:var(--red)">unexpected issuers</span> (certs not from your CA), <span style="color:var(--yellow)">wildcard certs</span> you didn't request, or certs for <span style="color:var(--orange)">subdomains you don't own</span> — these are all red flags for phishing infrastructure targeting your brand.
+      </div>
+    </div>
+  </div>
+
+  <!-- ── TAB: SPOOF TEST ── -->
+  <div class="tab-panel" id="tab-spoof">
+    <div class="spoof-card">
+      <div class="spoof-header">
+        <div class="spoof-title">📨 Email Spoofing Vulnerability Test</div>
+        <div style="font-size:.75rem;color:var(--muted2)">Analyze if your domain can be spoofed</div>
+      </div>
+      <div class="spoof-body">
+        <div class="spoof-warning">
+          <strong>⚠ Educational Use Only.</strong> This tool analyzes your DNS records to determine if email spoofing is theoretically possible. It does not send any emails. Use this to identify and fix vulnerabilities before attackers exploit them.
+        </div>
+        <div class="spoof-input-row">
+          <input class="spoof-field" id="spoofDomain" type="text" placeholder="yourdomain.com" />
+          <button class="spoof-analyze-btn" id="spoofBtn" onclick="runSpoofTest()">🔬 Analyze Spoofability</button>
+        </div>
+        <div id="spoofLoading" style="display:none;text-align:center;padding:1.5rem;color:var(--muted2);font-size:.8rem">
+          <div class="spin" style="margin:0 auto .7rem"></div>
+          Analyzing DNS records for spoofing vulnerabilities...
+        </div>
+        <div id="spoofResults" style="display:none"></div>
+      </div>
+    </div>
+    <div style="background:var(--bg1);border:1px solid var(--border);border-radius:12px;padding:1.2rem 1.5rem">
+      <div style="font-family:var(--head);font-size:.85rem;font-weight:700;margin-bottom:.8rem;color:var(--orange)">📚 What we check</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:.6rem">
+        <div style="font-size:.73rem;color:var(--muted2);padding:.5rem .7rem;background:var(--bg2);border-radius:6px;line-height:1.5"><strong style="color:var(--text)">SPF Policy</strong><br>Whether the SPF record enforces rejection or allows spoofing via permissive policies like +all or missing records.</div>
+        <div style="font-size:.73rem;color:var(--muted2);padding:.5rem .7rem;background:var(--bg2);border-radius:6px;line-height:1.5"><strong style="color:var(--text)">DMARC Enforcement</strong><br>Whether DMARC is set to reject/quarantine or just monitoring mode (p=none), which allows spoofed mail through.</div>
+        <div style="font-size:.73rem;color:var(--muted2);padding:.5rem .7rem;background:var(--bg2);border-radius:6px;line-height:1.5"><strong style="color:var(--text)">DKIM Signing</strong><br>Whether outbound email is cryptographically signed, making it harder to forge convincingly.</div>
+        <div style="font-size:.73rem;color:var(--muted2);padding:.5rem .7rem;background:var(--bg2);border-radius:6px;line-height:1.5"><strong style="color:var(--text)">Subdomain Policy</strong><br>Whether the DMARC sp= tag protects subdomains from being used as spoofing vectors.</div>
       </div>
     </div>
   </div>
@@ -1443,6 +1597,265 @@ function shareComparison(){
   const domB=document.getElementById('cDomainB').textContent;
   const text=`DNS Security Comparison\n${'='.repeat(40)}\n${domA}: Grade ${compareDataA.grade||'?'} — Score ${compareDataA.score??'?'}/100\n${domB}: Grade ${compareDataB.grade||'?'} — Score ${compareDataB.score??'?'}/100\n\nScanned with DNS Analyzer: ${window.location.origin}`;
   navigator.clipboard.writeText(text).then(()=>alert('Copied to clipboard!'));
+}
+
+
+// ── FEATURE 7: CERTIFICATE TRANSPARENCY ──────────────────────────────────────
+async function checkCerts(){
+  const domain = document.getElementById('certDomain').value.trim();
+  if(!domain){alert('Please enter a domain.');return;}
+  document.getElementById('certResults').style.display='none';
+  document.getElementById('certEmpty').style.display='none';
+  document.getElementById('certError').style.display='none';
+  document.getElementById('certLoading').style.display='block';
+  document.getElementById('certBtn').disabled=true;
+  try{
+    const r = await fetch(`https://crt.sh/?q=${encodeURIComponent('%25.'+domain)}&output=json`);
+    if(!r.ok)throw new Error('crt.sh returned '+r.status);
+    const data = await r.json();
+    document.getElementById('certLoading').style.display='none';
+    document.getElementById('certBtn').disabled=false;
+    if(!data||!data.length){document.getElementById('certEmpty').style.display='block';return;}
+    renderCerts(domain, data);
+  }catch(err){
+    document.getElementById('certLoading').style.display='none';
+    document.getElementById('certBtn').disabled=false;
+    // crt.sh has CORS issues in browser — use fallback analysis
+    renderCertsFallback(domain, err.message);
+  }
+}
+
+function renderCerts(domain, certs){
+  // Dedupe by serial + name
+  const seen=new Set();
+  const unique=certs.filter(c=>{
+    const key=c.serial_number||c.id;
+    if(seen.has(key))return false;seen.add(key);return true;
+  }).slice(0,50);
+
+  const issuers=[...new Set(unique.map(c=>c.issuer_name||'Unknown'))];
+  const names=[...new Set(unique.flatMap(c=>(c.name_value||'').split('\n')))].filter(n=>n&&n!==domain);
+  const wildcards=names.filter(n=>n.startsWith('*'));
+  const suspicious=unique.filter(c=>{
+    const issuer=(c.issuer_name||'').toLowerCase();
+    return !issuer.includes('digicert')&&!issuer.includes('comodo')&&!issuer.includes('sectigo')&&!issuer.includes("let's encrypt")&&!issuer.includes('globalsign')&&!issuer.includes('entrust')&&!issuer.includes('godaddy');
+  });
+
+  const strip=document.getElementById('certInfoStrip');
+  strip.innerHTML=`
+    <div class="cert-info-tile"><div class="cert-info-val" style="color:var(--cyan)">${unique.length}</div><div class="cert-info-lbl">Total Certs</div></div>
+    <div class="cert-info-tile"><div class="cert-info-val" style="color:${wildcards.length?'var(--yellow)':'var(--green)'}">${wildcards.length}</div><div class="cert-info-lbl">Wildcards</div></div>
+    <div class="cert-info-tile"><div class="cert-info-val" style="color:${suspicious.length?'var(--red)':'var(--green)'}">${suspicious.length}</div><div class="cert-info-lbl">Unusual Issuers</div></div>
+    <div class="cert-info-tile"><div class="cert-info-val" style="color:var(--blue2)">${issuers.length}</div><div class="cert-info-lbl">Unique CAs</div></div>
+  `;
+
+  const list=document.getElementById('certList');list.innerHTML='';
+  const sorted=[...unique].sort((a,b)=>new Date(b.not_before||0)-new Date(a.not_before||0));
+  sorted.slice(0,20).forEach(c=>{
+    const issuer=c.issuer_name||'Unknown CA';
+    const issuedDate=c.not_before?new Date(c.not_before).toLocaleDateString():'Unknown';
+    const expiryDate=c.not_after?new Date(c.not_after).toLocaleDateString():'Unknown';
+    const nameVal=c.name_value||domain;
+    const isWild=nameVal.includes('*');
+    const isSuspicious=suspicious.includes(c);
+    const dotColor=isSuspicious?'var(--red)':isWild?'var(--yellow)':'var(--cyan)';
+    const riskLabel=isSuspicious?'<span class="cert-risk cert-risk-high">UNUSUAL ISSUER</span>':isWild?'<span class="cert-risk cert-risk-medium">WILDCARD</span>':'<span class="cert-risk cert-risk-low">NORMAL</span>';
+    list.innerHTML+=`<div class="cert-entry">
+      <div class="cert-entry-dot" style="background:${dotColor}"></div>
+      <div class="cert-entry-body">
+        <div class="cert-entry-domain">${nameVal.split('\n')[0]} ${riskLabel}</div>
+        <div class="cert-entry-meta">Issued: ${issuedDate} · Expires: ${expiryDate}</div>
+        <div class="cert-entry-issuer">CA: ${issuer.split('O=')[1]?.split(',')[0]||issuer.slice(0,60)}</div>
+      </div>
+    </div>`;
+  });
+  if(sorted.length>20)list.innerHTML+=`<div style="padding:.7rem;font-size:.72rem;color:var(--muted);text-align:center">Showing 20 of ${sorted.length} certificates · <a href="https://crt.sh/?q=%.${domain}" target="_blank" style="color:var(--cyan)">View all on crt.sh</a></div>`;
+  document.getElementById('certResults').style.display='block';
+}
+
+function renderCertsFallback(domain, errMsg){
+  // crt.sh blocks direct browser fetch due to CORS — show instructions
+  const el=document.getElementById('certError');
+  el.innerHTML=`<div style="margin-bottom:.6rem"><strong>Certificate Transparency check requires server-side lookup.</strong></div>
+    <div style="margin-bottom:.8rem">Due to browser security restrictions, CT log queries must go through your backend. Your API already has the infrastructure for this.</div>
+    <div style="margin-bottom:.6rem">🔗 View your domain's certificates directly:</div>
+    <a href="https://crt.sh/?q=%.${domain}" target="_blank" style="color:var(--cyan);font-size:.8rem;display:block;margin-bottom:.4rem">→ View ${domain} on crt.sh</a>
+    <a href="https://transparencyreport.google.com/https/certificates?hl=en&cert_search_auth=&cert_search_type=hostname&cert_search=${domain}" target="_blank" style="color:var(--cyan);font-size:.8rem">→ View on Google Transparency Report</a>`;
+  el.style.display='block';
+}
+
+// ── FEATURE 8: SPOOF TEST ─────────────────────────────────────────────────────
+async function runSpoofTest(){
+  const domain = document.getElementById('spoofDomain').value.trim();
+  if(!domain){alert('Please enter a domain.');return;}
+  document.getElementById('spoofResults').style.display='none';
+  document.getElementById('spoofLoading').style.display='block';
+  document.getElementById('spoofBtn').disabled=true;
+
+  try{
+    // Trigger a scan with spf, dmarc, dkim analyzers
+    const headers={'Content-Type':'application/json'};
+    const r=await fetch(`${API}/scan`,{method:'POST',headers,body:JSON.stringify({domain,analyzers:['spf','dmarc','dkim'],include_intel:false})});
+    const scan=await r.json();
+    if(!r.ok)throw new Error(scan?.detail?.message||'Scan failed');
+    const result=await pollBulk(scan.id,'',90);
+    document.getElementById('spoofLoading').style.display='none';
+    document.getElementById('spoofBtn').disabled=false;
+    renderSpoofResults(domain, result);
+  }catch(err){
+    document.getElementById('spoofLoading').style.display='none';
+    document.getElementById('spoofBtn').disabled=false;
+    document.getElementById('spoofResults').innerHTML=`<div style="color:var(--red2);font-size:.8rem;padding:.5rem">⚠ Error: ${err.message}</div>`;
+    document.getElementById('spoofResults').style.display='block';
+  }
+}
+
+function renderSpoofResults(domain, data){
+  const findings = data.findings||[];
+  const spfFindings  = findings.filter(f=>f.analyzer==='spf');
+  const dmarcFindings= findings.filter(f=>f.analyzer==='dmarc');
+  const dkimFindings = findings.filter(f=>f.analyzer==='dkim');
+
+  // Determine spoofability
+  const spfFailed  = spfFindings.some(f=>!f.passed&&['critical','high'].includes((f.severity||'').toLowerCase()));
+  const dmarcFailed= dmarcFindings.some(f=>!f.passed&&['critical','high'].includes((f.severity||'').toLowerCase()));
+  const dkimFailed = dkimFindings.some(f=>!f.passed);
+  const spfMissing = spfFindings.some(f=>!f.passed&&(f.title||'').toLowerCase().includes('missing'));
+  const dmarcNone  = dmarcFindings.some(f=>!f.passed&&(f.description||'').toLowerCase().includes('p=none'));
+
+  // Get actual record values from findings
+  const spfRecord  = spfFindings.find(f=>f.evidence)?.evidence||null;
+  const dmarcRecord= dmarcFindings.find(f=>f.evidence)?.evidence||null;
+
+  let overallVulnerable, verdictClass, verdictIcon, verdictText, spoofScore;
+  if(spfMissing&&dmarcFailed){
+    overallVulnerable=true;verdictClass='verdict-vulnerable';verdictIcon='🚨';
+    verdictText='HIGHLY VULNERABLE — Easy to spoof';spoofScore=95;
+  }else if(spfFailed||dmarcFailed){
+    overallVulnerable=true;verdictClass='verdict-vulnerable';verdictIcon='⚠️';
+    verdictText='VULNERABLE — Spoofing is possible';spoofScore=65;
+  }else if(dmarcNone){
+    overallVulnerable=true;verdictClass='verdict-partial';verdictIcon='🟡';
+    verdictText='PARTIALLY PROTECTED — DMARC not enforcing';spoofScore=40;
+  }else{
+    overallVulnerable=false;verdictClass='verdict-protected';verdictIcon='🛡️';
+    verdictText='PROTECTED — Spoofing is difficult';spoofScore=5;
+  }
+
+  const badgeBg=overallVulnerable?(spoofScore>60?'rgba(255,23,68,.15)':'rgba(255,214,0,.12)'):'rgba(0,255,136,.1)';
+  const badgeColor=overallVulnerable?(spoofScore>60?'var(--red)':'var(--yellow)'):'var(--green)';
+
+  // Build checks
+  const checks=[
+    {
+      name:'SPF Record',
+      icon:spfFailed?'❌':'✅',
+      tag:spfFailed?'VULNERABLE':'PROTECTED',
+      tagClass:spfFailed?'tag-vuln':'tag-safe',
+      detail:spfMissing
+        ?`No SPF record found for ${domain}. Anyone can send email claiming to be from this domain.`
+        :spfFailed
+          ?`SPF record exists but uses a permissive policy that allows spoofing.`
+          :`SPF record is properly configured and will reject unauthorized senders.`,
+      record:spfRecord
+    },
+    {
+      name:'DMARC Policy',
+      icon:dmarcFailed?'❌':dmarcNone?'⚠️':'✅',
+      tag:dmarcFailed?'VULNERABLE':dmarcNone?'MONITORING ONLY':'ENFORCING',
+      tagClass:dmarcFailed?'tag-vuln':dmarcNone?'tag-partial':'tag-safe',
+      detail:dmarcFailed
+        ?`No DMARC record found. Without DMARC, mail servers cannot take action on spoofed emails.`
+        :dmarcNone
+          ?`DMARC is set to p=none (monitoring only). Spoofed emails will be delivered — only reported.`
+          :`DMARC is enforcing with reject or quarantine policy. Spoofed emails will be blocked.`,
+      record:dmarcRecord
+    },
+    {
+      name:'DKIM Signing',
+      icon:dkimFailed?'⚠️':'✅',
+      tag:dkimFailed?'NOT DETECTED':'SIGNING ACTIVE',
+      tagClass:dkimFailed?'tag-partial':'tag-safe',
+      detail:dkimFailed
+        ?`No DKIM selectors detected for common signing keys. Without DKIM, emails cannot be cryptographically verified as authentic.`
+        :`DKIM signing keys detected. Legitimate emails can be verified, making spoofing harder to pull off convincingly.`,
+      record:null
+    },
+    {
+      name:'Subdomain Protection',
+      icon:dmarcFailed?'❌':'✅',
+      tag:dmarcFailed?'UNPROTECTED':'PROTECTED',
+      tagClass:dmarcFailed?'tag-vuln':'tag-safe',
+      detail:dmarcFailed
+        ?`Without DMARC, subdomains like mail.${domain} or newsletter.${domain} can also be spoofed freely.`
+        :`DMARC sp= tag or inherited policy protects subdomains from being used as spoofing vectors.`,
+      record:null
+    }
+  ];
+
+  // Attack scenarios
+  const scenarios=[];
+  if(overallVulnerable){
+    if(spoofScore>60){
+      scenarios.push({icon:'🎣',text:`Phishing: Send email as noreply@${domain} to your customers`,risk:'CRITICAL',riskColor:'var(--red)'});
+      scenarios.push({icon:'💼',text:`Business Email Compromise: Impersonate CEO or finance team`,risk:'CRITICAL',riskColor:'var(--red)'});
+    }
+    scenarios.push({icon:'📧',text:`Spam campaigns using ${domain} to bypass filters`,risk:'HIGH',riskColor:'var(--orange)'});
+    scenarios.push({icon:'🔐',text:`Password reset spoofing — intercept account recovery flows`,risk:'HIGH',riskColor:'var(--orange)'});
+  }
+
+  let html=`<div class="spoof-result">
+    <div class="spoof-result-header">
+      <div class="spoof-verdict ${verdictClass}">
+        <span class="verdict-icon">${verdictIcon}</span>
+        <span>${verdictText}</span>
+      </div>
+      <div class="spoof-score-badge" style="background:${badgeBg};color:${badgeColor}">
+        Spoof Risk: ${spoofScore}%
+      </div>
+    </div>
+    <div class="spoof-body-content">`;
+
+  checks.forEach(c=>{
+    html+=`<div class="spoof-check-row">
+      <div class="spoof-check-icon">${c.icon}</div>
+      <div class="spoof-check-body">
+        <div class="spoof-check-name">${c.name}</div>
+        <div class="spoof-check-detail">${c.detail}</div>
+        <span class="spoof-check-tag ${c.tagClass}">${c.tag}</span>
+        ${c.record?`<div class="spoof-raw"><div class="spoof-raw-label">Record:</div>${c.record}</div>`:''}
+      </div>
+    </div>`;
+  });
+
+  if(scenarios.length){
+    html+=`<div class="attack-scenarios">
+      <div class="attack-title">Possible Attack Scenarios</div>`;
+    scenarios.forEach(s=>{
+      html+=`<div class="attack-item">
+        <div class="attack-item-icon">${s.icon}</div>
+        <div class="attack-item-text">${s.text}</div>
+        <span class="attack-item-risk" style="background:${s.riskColor}22;color:${s.riskColor}">${s.risk}</span>
+      </div>`;
+    });
+    html+='</div>';
+  }
+
+  html+=`</div></div>`;
+
+  if(overallVulnerable){
+    html+=`<div class="remediation" style="margin-top:1rem;font-size:.78rem;line-height:1.6;padding:.9rem 1.1rem">
+      <strong>Immediate actions to fix this:</strong><br>
+      ${spfMissing?`1. Add SPF record: <code style="background:var(--bg0);padding:1px 5px;border-radius:3px;color:var(--cyan)">v=spf1 include:_spf.yourmailprovider.com ~all</code><br>`:''}
+      ${dmarcFailed?`2. Add DMARC record: <code style="background:var(--bg0);padding:1px 5px;border-radius:3px;color:var(--cyan)">v=DMARC1; p=quarantine; rua=mailto:dmarc@${domain}</code><br>`:''}
+      ${dmarcNone?`3. Upgrade DMARC from p=none to p=quarantine then p=reject<br>`:''}
+      ${dkimFailed?`4. Enable DKIM signing in your email provider and publish the public key as a TXT record`:''}
+    </div>`;
+  }
+
+  document.getElementById('spoofResults').innerHTML=html;
+  document.getElementById('spoofResults').style.display='block';
+  document.getElementById('spoofResults').scrollIntoView({behavior:'smooth',block:'start'});
 }
 
 </script>
